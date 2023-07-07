@@ -13,6 +13,12 @@ export default {
       lg: "1024px",
       xl: "1280px",
     },
+    colors: {
+      "light-beige": "#e3ded9",
+      "dark-beige": "#bba686",
+      "dark-blue": "#416270",
+      "light-blue": "#8aa4ab",
+    },
   },
   plugins: [require("flowbite/plugin")],
 };

@@ -2,11 +2,3 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Color Paletts */
-
-:root {
-  --ligth-beige: #f8edd1;
-  --light-red: #d88a8a;
-  --dark-green: #9d9d93;
-  --light-green: #c5cfc6;
-}

@@ -1,0 +1,7 @@
+.landing-hero-image {
+  background-image: url("/landing.jpeg");
+  background-size: cover;
+  background-position: center;
+  object-fit: cover;
+  background-repeat: no-repeat;
+}

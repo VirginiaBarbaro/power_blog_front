@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { ArticleProps } from "../types/article";
-import "../style/landing.css";
+import { Link } from "react-router-dom";
 
 function Landing() {
   const [articles, setArticles] = useState<ArticleProps[]>([]);
@@ -31,14 +31,17 @@ function Landing() {
               articles, all in one place.
             </p>
             <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4 justify-center">
-              <a href="#" className="text-light-beige get-started rounded">
+              <Link
+                to={"/home"}
+                className="text-light-beige get-started rounded"
+              >
                 <span className="span-get-started"></span>
                 <span className="span-get-started"></span>
                 <span className="span-get-started"></span>
                 <span className="span-get-started"></span>
                 Get started
                 <i className="fa-solid fa-arrow-right fa-bounce mx-2"></i>
-              </a>
+              </Link>
             </div>
           </div>
         </section>

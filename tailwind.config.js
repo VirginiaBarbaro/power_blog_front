@@ -8,7 +8,7 @@ export default {
   theme: {
     screens: {
       xs: "320px",
-      sm: "375px",
+      sm: "575px",
       md: "768px",
       lg: "1024px",
       xl: "1280px",
@@ -16,7 +16,7 @@ export default {
     colors: {
       "light-beige": "#e3ded9",
       "dark-beige": "#bba686",
-      "dark-blue": "#416270",
+      "dark-blue": "#283e56",
       "light-blue": "#8aa4ab",
     },
   },

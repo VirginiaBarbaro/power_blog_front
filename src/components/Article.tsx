@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { ArticleProps } from "../types/article";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Article() {
   const [articles, setArticles] = useState<ArticleProps[]>([]);
@@ -46,7 +46,7 @@ function Article() {
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black group-hover:from-black/70 group-hover:via-black/60 group-hover:to-black/70"></div>
                 <div className="absolute inset-0 flex translate-y-[60%] flex-col items-center justify-center px-9 text-center transition-all duration-500 group-hover:translate-y-0">
                   <h1 className="font-dmserif text-3xl font-bold text-white">
-                    <i className="fa-solid fa-angles-up text-dark-beige"></i>
+                    <i className="fa-solid fa-angles-up text-electric-blue"></i>
                   </h1>
                   <p className="mb-3 text-2xl font-bold text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     {article.title}
@@ -54,12 +54,14 @@ function Article() {
                   <p className="mb-3 text-base text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     {truncateText(article.content, 10)}
                   </p>
-                  <button
-                    type="button"
-                    className="text-white bg-dark-beige hover:bg-gradient-to-br shadow-lg  dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 read-btn ease-in-out duration-300 hover:bg-light-blue"
-                  >
-                    Read
-                  </button>
+                  <Link to={`/article/${article.id}`}>
+                    <button
+                      type="button"
+                      className="text-white bg-electric-blue shadow-lg  dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 read-btn ease-in-out duration-300 hover:outline outline-2 hover:bg-transparent"
+                    >
+                      Read
+                    </button>
+                  </Link>
                 </div>
               </div>
             ))}

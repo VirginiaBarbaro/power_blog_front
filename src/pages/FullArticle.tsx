@@ -1,7 +1,7 @@
 import Article from "../components/Article";
 import Navbar from "../components/Navbar";
 
-function Home() {
+function FullArticle() {
   return (
     <>
       <Navbar />
@@ -10,4 +10,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default FullArticle;

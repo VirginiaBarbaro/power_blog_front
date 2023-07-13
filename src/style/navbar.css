@@ -1,9 +1,9 @@
 .navbar-dynamic {
   top: 0px;
-  background-color: #eeeeee5a;
+  background-color: #eeeeee87;
   color: #000000 !important;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   transition: all 1.3s ease;
 }
 
@@ -13,32 +13,43 @@
   background: transparent;
 }
 
-.navbar-link-effect {
+/* Link effect  */
+
+.element-navbar {
+  background-image: linear-gradient(to right, #0088cc, #0088cc 50%, #000 50%);
+  background-size: 200% 100%;
+  background-position: -100%;
+  display: inline-block;
+  padding: 5px 0;
   position: relative;
-  padding: 5px;
+  background-clip: unset;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease-in-out;
 }
 
-.navbar-link-effect::before {
+.element-navbar::before {
   content: "";
+  background: #0088cc;
+  display: block;
   position: absolute;
-  bottom: 0;
+  bottom: -3px;
   left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(to right, #eeeeee, #666666);
-
-  /* background: #979797; */
-  z-index: 1;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.5s ease-in-out;
+  width: 0;
+  height: 3px;
+  transition: all 0.3s ease-in-out;
 }
 
-.navbar-link-effect:hover::before {
-  transform: scaleX(1);
+.element-navbar:hover {
+  background-position: 0;
+}
+
+.element-navbar:hover::before {
+  width: 100%;
 }
 
 .navbar-link-effect:active {
+  color: #0088cc;
   transform: scale(0.9);
 }
 
@@ -50,10 +61,6 @@
 
 .Toastify__toast-icon svg {
   fill: #0088cc;
-}
-
-.Toastify__toast {
-  color: #0088cc;
 }
 
 .Toastify__close-button:hover,

@@ -1,3 +1,71 @@
 .read-btn:active {
   transform: scale(0.9);
 }
+
+/* .btn-profile-box {
+  background-color: #eeeeee;
+} */
+
+.to-profile {
+  text-align: center;
+  cursor: pointer;
+  color: #0088cc;
+  background-color: #97979756;
+  padding: 0.5rem;
+  /* line-height: 50px; */
+  /* height: 50px; */
+  width: auto;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.to-profile .btn-to-profile {
+  transition: all 0.3s;
+}
+
+.to-profile::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0;
+  transition: all 0.3s;
+  border-top-width: 2px;
+  border-bottom-width: 2px;
+  border-top-style: solid;
+  border-bottom-style: solid;
+  border-top-color: #0088cc;
+  border-bottom-color: #0088cc;
+  transform: scale(0.1, 1);
+}
+
+.to-profile:hover .btn-to-profile {
+  letter-spacing: 2px;
+}
+
+.to-profile:hover::before {
+  opacity: 1;
+  transform: scale(1, 1);
+}
+
+.to-profile::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transition: all 0.3s;
+}
+.to-profile:hover::after {
+  opacity: 0;
+  transform: scale(0.1, 1);
+}
+
+.comment-box {
+  border-bottom: 1px solid #666666;
+}

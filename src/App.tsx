@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 import Home from "./pages/Home";
 import ScrollToTop from "./components/utilities/ScrollToTop";
-import FullArticle from "./pages/SingleArticle";
+import FullArticle from "./components/SingleArticle";
 
 function App() {
   return (

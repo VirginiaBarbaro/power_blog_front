@@ -1,26 +1,12 @@
+import { UserProps } from "./user";
 export interface ArticleProps {
   id: number;
   title: string;
   content: string;
+  headline: string;
   image: string;
   adminId: number | null;
   userId: number | null;
-  user?: {
-    id: number;
-    firstname: string;
-    lastname: string;
-    username: string;
-    email: string;
-    avatar: string;
-    isAdmin: boolean;
-  };
-  admin?: {
-    id: number;
-    firstname: string;
-    lastname: string;
-    username: string;
-    email: string;
-    avatar: string;
-    isAdmin: boolean;
-  };
+  createdAt: string;
+  user: UserProps;
 }

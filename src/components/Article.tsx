@@ -12,7 +12,6 @@ function Article() {
         method: "get",
         url: `${import.meta.env.VITE_APP_API_URL}/articles`,
       });
-      console.log(response.data);
       setArticles(response.data);
     };
     getArticles();
@@ -30,10 +29,13 @@ function Article() {
   return (
     articles && (
       <>
-        <div className="flex min-h-screen items-center bg-neutral-800 mt-28">
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 mx-auto pb-8">
+        <div className="container mx-auto flex min-h-screen items-center bg-neutral-800 max-[639px]:mt-24">
+          <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-auto pb-8">
             {articles.map((article: ArticleProps) => (
-              <div className="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl   hover:shadow-black/30 rounded-lg">
+              <div
+                key={article.id}
+                className="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl   hover:shadow-black/30 rounded-lg"
+              >
                 <div className="h-96 w-72">
                   <img
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-125"
@@ -52,12 +54,12 @@ function Article() {
                     {article.title}
                   </p>
                   <p className="mb-3 text-base text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    {truncateText(article.content, 10)}
+                    {truncateText(article.headline, 10)}
                   </p>
                   <Link to={`/article/${article.id}`}>
                     <button
                       type="button"
-                      className="text-white bg-electric-blue shadow-lg  dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 read-btn ease-in-out duration-300 hover:outline outline-2 hover:bg-transparent"
+                      className="text-white bg-electric-blue shadow-lg  dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 read-btn ease-in-out duration-300 hover:outline outline-2 hover:bg-transparent hover:text-white"
                     >
                       Read
                     </button>

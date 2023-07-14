@@ -16,15 +16,6 @@
   --tw-ring-shadow: none !important;
 }
 
-.text-white {
-  color: #000 !important;
-}
-
-.text-white:hover {
-  color: #0088cc !important;
-}
-/* Dropdown */
-
 /* Link effect  */
 .element-navbar {
   background-image: linear-gradient(to right, #0088cc, #0088cc 50%, #000 50%);

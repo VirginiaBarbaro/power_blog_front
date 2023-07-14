@@ -1,11 +1,13 @@
-import Article from "../components/Article";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/NavbarHome";
+import ArticleCard from "../components/ArticleCard";
 
 function Home() {
   return (
     <>
       <Navbar />
-      <Article />
+      <div className="mt-28">
+        <ArticleCard />
+      </div>
     </>
   );
 }

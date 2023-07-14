@@ -2,11 +2,25 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { ArticleProps } from "../types/article";
-import Navbar from "./Navbar";
+import NavbarHome from "./NavbarHome";
 import { CommentProps } from "../types/comment";
 import { formatDistanceToNow } from "date-fns";
+import {
+  Drawer,
+  DrawerBody,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+} from "@chakra-ui/react";
 
 function SingleArticle() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleClick = () => {
+    setIsOpen(true);
+  };
+
   const { id } = useParams();
 
   const [comments, setComments] = useState<CommentProps[]>([]);
@@ -40,7 +54,7 @@ function SingleArticle() {
 
   return article && comments ? (
     <>
-      <Navbar />
+      <NavbarHome />
       <div className="container px-4 max-w-6xl mx-auto mt-32 pb-5 grid place-content-center">
         <h2 className="text-4xl font-extrabold dark:text-white">
           {article.title}
@@ -94,8 +108,12 @@ function SingleArticle() {
         <p className="mt-8 max-w-4xl text-black">{article.content}</p>
         <div className="border-y-2 border-semidark-grey flex gap-x-10 mt-8 py-3">
           <div>
-            <i className="fa-regular fa-comment text-electric-blue"></i>
-            <span className="ml-2 text-dark-grey">{comments.length}</span>
+            <button onClick={handleClick}>
+              <i className="fa-regular fa-comment text-electric-blue"></i>
+              <span className="ml-2 text-dark-grey hover:text-dark-black hover:font-bold">
+                {comments.length}
+              </span>
+            </button>
           </div>
           <div>
             <button>
@@ -113,46 +131,55 @@ function SingleArticle() {
           </div>
         </div>
 
-        {comments.map((comment: CommentProps) => {
-          return (
-            <>
-              <div key={comment.id} className="my-2 py-4 comment-box">
-                <ul
-                  role="list"
-                  className="divide-gray-200 dark:divide-gray-700"
-                >
-                  <li>
-                    <div className="flex items-center space-x-3 mt-4">
-                      <div className="flex-shrink-0">
-                        <img
-                          className="w-10 h-10 rounded-full mr-1"
-                          src={`${
-                            import.meta.env.VITE_APP_API_URL
-                          }/${comment.user.avatar.replace("public\\", "")}`}
-                          alt="Neil image"
-                        />
-                      </div>
-                      <div className="flex">
-                        <p className="text-md font-semibold mb-2 text-gray-900 truncate dark:text-white">
-                          {comment.user.firstname} {comment.user.lastname} ·{" "}
-                        </p>
-                        <div className="">
-                          <p className="text-semidark-grey ml-2 text-sm">
-                            {formatDistanceToNow(new Date(article.createdAt))}{" "}
-                            ago
-                          </p>
+        <Drawer onClose={() => setIsOpen(false)} isOpen={isOpen} size="sm">
+          <>
+            <DrawerOverlay />
+            <DrawerContent>
+              <DrawerCloseButton />
+              <DrawerHeader>Comments</DrawerHeader>
+              <DrawerBody>
+                {comments.map((comment: CommentProps) => {
+                  return (
+                    <ul
+                      role="list"
+                      className="divide-gray-200 dark:divide-gray-700 py-3"
+                      key={comment.id}
+                    >
+                      <li>
+                        <div className="flex items-center space-x-3 mt-4">
+                          <div className="flex-shrink-0">
+                            <img
+                              className="w-10 h-10 rounded-full mr-1"
+                              src={`${
+                                import.meta.env.VITE_APP_API_URL
+                              }/${comment.user.avatar.replace("public\\", "")}`}
+                              alt="Neil image"
+                            />
+                          </div>
+                          <div className="flex">
+                            <p className="text-md font-semibold mb-2 text-gray-900 truncate dark:text-white">
+                              {comment.user.firstname} {comment.user.lastname} ·{" "}
+                            </p>
+                            <div className="">
+                              <p className="text-semidark-grey ml-2 text-sm">
+                                {formatDistanceToNow(
+                                  new Date(article.createdAt)
+                                )}{" "}
+                              </p>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                    <p className="text-md text-dark-grey truncate dark:text-gray-400 align ml-14 ">
-                      {comment.content}
-                    </p>
-                  </li>
-                </ul>
-              </div>
-            </>
-          );
-        })}
+                        <p className="text-md text-dark-grey truncate dark:text-gray-400 align ml-14">
+                          {comment.content}
+                        </p>
+                      </li>
+                    </ul>
+                  );
+                })}
+              </DrawerBody>
+            </DrawerContent>
+          </>
+        </Drawer>
       </div>
     </>
   ) : (

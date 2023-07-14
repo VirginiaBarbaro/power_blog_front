@@ -1,20 +1,31 @@
 .navbar-dynamic {
   top: 0px;
-  background-color: #eeeeee87;
+  background-color: #6666665d;
   color: #000000 !important;
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   transition: all 1.3s ease;
 }
 
-.bg-navbar {
-  /* background: linear-gradient(135deg, #bba686, #8aa4ab); */
-  border-bottom: 2px solid #979797;
-  background: transparent;
+.focus\:ring-cyan-300:focus {
+  border: none !important;
 }
 
-/* Link effect  */
+.focus\:ring-2:focus {
+  border: none !important;
+  --tw-ring-shadow: none !important;
+}
 
+.text-white {
+  color: #000 !important;
+}
+
+.text-white:hover {
+  color: #0088cc !important;
+}
+/* Dropdown */
+
+/* Link effect  */
 .element-navbar {
   background-image: linear-gradient(to right, #0088cc, #0088cc 50%, #000 50%);
   background-size: 200% 100%;
@@ -22,7 +33,6 @@
   display: inline-block;
   padding: 5px 0;
   position: relative;
-  background-clip: unset;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   transition: all 0.3s ease-in-out;
@@ -46,11 +56,6 @@
 
 .element-navbar:hover::before {
   width: 100%;
-}
-
-.navbar-link-effect:active {
-  color: #0088cc;
-  transform: scale(0.9);
 }
 
 /* Toast Message  */

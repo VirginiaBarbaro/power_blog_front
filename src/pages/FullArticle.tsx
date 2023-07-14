@@ -1,5 +1,5 @@
-import Article from "../components/Article";
-import Navbar from "../components/Navbar";
+import Article from "../components/ArticleCard";
+import Navbar from "../components/NavbarHome";
 
 function FullArticle() {
   return (

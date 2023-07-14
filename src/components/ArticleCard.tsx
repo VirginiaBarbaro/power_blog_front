@@ -3,7 +3,7 @@ import axios from "axios";
 import { ArticleProps } from "../types/article";
 import { Link } from "react-router-dom";
 
-function Article() {
+function ArticleCard() {
   const [articles, setArticles] = useState<ArticleProps[]>([]);
 
   useEffect(() => {
@@ -74,4 +74,4 @@ function Article() {
   );
 }
 
-export default Article;
+export default ArticleCard;

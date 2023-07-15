@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { ArticleProps } from "../types/article";
-import NavbarHome from "./NavbarHome";
+import NavigationBar from "../components/NavigationBar";
 import { CommentProps } from "../types/comment";
 import { formatDistanceToNow } from "date-fns";
 import {
@@ -54,7 +54,7 @@ function SingleArticle() {
 
   return article && comments ? (
     <>
-      <NavbarHome />
+      <NavigationBar />
       <div className="container px-4 max-w-6xl mx-auto mt-32 pb-5 grid place-content-center">
         <h2 className="text-4xl font-extrabold dark:text-white">
           {article.title}

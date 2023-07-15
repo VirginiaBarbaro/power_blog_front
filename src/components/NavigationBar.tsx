@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Avatar, Dropdown } from "flowbite-react";
 import { Navbar } from "flowbite-react";
 
-function NavbarHome() {
+function NavigationBar() {
   const [isScrolling, setIsScrolling] = useState<boolean>(false);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ function NavbarHome() {
               >
                 <ul className=" text-lg flex flex-col p-4 md:p-0 font-medium rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 text-dark-blue">
                   <Link
-                    to="#"
+                    to="/home"
                     className="element-navbar block md:bg-transparent py-2 pl-3 pr-4 md:p-0"
                   >
                     Home
@@ -53,19 +53,13 @@ function NavbarHome() {
                     to="#"
                     className="element-navbar block md:bg-transparent py-2 pl-3 pr-4 md:p-0"
                   >
-                    About
+                    Categories
                   </Link>
                   <Link
                     to="#"
                     className="element-navbar block md:bg-transparent py-2 pl-3 pr-4 md:p-0"
                   >
-                    Services
-                  </Link>
-                  <Link
-                    to="#"
-                    className="element-navbar block md:bg-transparent py-2 pl-3 pr-4 md:p-0"
-                  >
-                    Pricing
+                    Post
                   </Link>
                   <Link
                     to="#"
@@ -104,4 +98,4 @@ function NavbarHome() {
   );
 }
 
-export default NavbarHome;
+export default NavigationBar;

@@ -1,10 +1,82 @@
+/* Article */
+
+.article-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.article-box {
+  box-shadow: inset -12px -8px 40px #46464620;
+  --border-radius: 0.75rem;
+  --primary-color: #0088cc;
+  --secondary-color: #eeeeee;
+  position: relative;
+}
+
+.article-box .article-title {
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.article-box .article-arrow {
+  position: absolute;
+  cursor: pointer;
+  background: var(--primary-color);
+  padding: 0.4rem;
+  border-top-left-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+  bottom: 0;
+  right: 0;
+  transition: 0.2s;
+  display: flex;
+  justify-content: center;
+}
+
+.article-box i {
+  transition: 1s;
+}
+
+.article-box:hover .article-title {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+.article-box:hover .article-arrow {
+  background: #eeeeee;
+  color: #0088cc;
+  border: 2px solid #0088cc;
+}
+
+.article-box:hover .read-more {
+  color: #0088cc;
+}
+
+.article-box:hover .arrow-icon {
+  color: #0088cc;
+}
+
+.article-box:hover .article-arrow i {
+  transform: translateX(3px);
+}
+
+.read-more {
+  color: #eeeeee;
+}
+
+.arrow-icon {
+  color: #eeeeee;
+}
+
+/* Prueba  */
+
+/* ArticleCard */
+
 .read-btn:active {
   transform: scale(0.9);
 }
 
-/* .btn-profile-box {
-  background-color: #eeeeee;
-} */
+/* ArticlePage */
 
 .to-profile {
   text-align: center;
@@ -12,8 +84,6 @@
   color: #0088cc;
   background-color: #97979756;
   padding: 0.5rem;
-  /* line-height: 50px; */
-  /* height: 50px; */
   width: auto;
   transition: all 0.3s;
   position: relative;
@@ -65,5 +135,3 @@
   opacity: 0;
   transform: scale(0.1, 1);
 }
-
-/* Article Card Carrousel  */

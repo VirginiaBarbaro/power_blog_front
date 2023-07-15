@@ -5,7 +5,6 @@ export interface ArticleProps {
   content: string;
   headline: string;
   image: string;
-  adminId: number | null;
   userId: number | null;
   createdAt: string;
   user: UserProps;

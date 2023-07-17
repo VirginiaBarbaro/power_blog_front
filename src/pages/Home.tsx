@@ -1,6 +1,5 @@
 import Article from "../components/Article";
 import Navbar from "../components/NavigationBar";
-// import ArticleCard from "../components/ArticleCard";
 
 function Home() {
   return (

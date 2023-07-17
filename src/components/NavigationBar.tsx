@@ -42,7 +42,7 @@ function NavigationBar() {
                 className="items-center justify-between w-full md:flex md:w-auto mt-1"
                 id="navbar-sticky"
               >
-                <ul className=" text-lg flex flex-col p-4 md:p-0 font-medium rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 text-dark-blue">
+                <ul className="text-lg flex flex-col p-4 md:p-0 font-semibold rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 text-dark-blue">
                   <Link
                     to="/home"
                     className="element-navbar block md:bg-transparent py-2 pl-3 pr-4 md:p-0"

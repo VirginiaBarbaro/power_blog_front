@@ -176,6 +176,16 @@ function SingleArticle() {
                     </ul>
                   );
                 })}
+                {comments.length === 0 && (
+                  <div className="no-comments rounded mx-auto">
+                    <h2 className="no-comments-title text-center">
+                      This article haven't comments yet!
+                    </h2>
+                    <h2 className="no-comments-message text-center">
+                      Be te first to comment!
+                    </h2>
+                  </div>
+                )}
               </DrawerBody>
             </DrawerContent>
           </>

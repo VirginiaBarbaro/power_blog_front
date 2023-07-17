@@ -7,3 +7,8 @@ export interface UserProps {
   avatar: string;
   isAdmin: boolean;
 }
+
+export interface UserLogin {
+  email: string;
+  password: string;
+}

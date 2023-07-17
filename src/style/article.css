@@ -68,8 +68,6 @@
   color: #eeeeee;
 }
 
-/* Prueba  */
-
 /* ArticleCard */
 
 .read-btn:active {
@@ -77,6 +75,28 @@
 }
 
 /* ArticlePage */
+
+/* No Comments de ArticlePage  */
+
+.no-comments {
+  margin-top: 1rem;
+  padding: 1rem 1.2rem 1rem 1.2rem;
+  background-color: #eeeeee;
+}
+
+.no-comments-title {
+  margin-bottom: 0.8rem;
+  font-size: 1.7rem;
+  color: #666666;
+}
+
+.no-comments-message {
+  color: #000000;
+  font-size: 1rem;
+  font-weight: 200;
+}
+
+/* End No comments ArticlePage */
 
 .to-profile {
   text-align: center;

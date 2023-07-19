@@ -16,15 +16,13 @@ function UserProfile() {
     loggedUser && (
       <>
         <NavigationBar />
-        <div className="mt-28 container mx-auto sm:grid sm:grid-cols-3">
-          <div className="border sm:col-span-2">columna 1</div>
-          <div className="columna1 border sm:col-span-1">
-            {authorInfo.id === loggedUser.id ? (
-              <InfoUserLog />
-            ) : (
-              <InfoUserAuthor authorInfo={authorInfo} />
-            )}
-          </div>
+        {/* <div className="border sm:col-span-2">columna 1</div> */}
+        <div className="container border mx-auto mt-28">
+          {authorInfo.id === loggedUser.id ? (
+            <InfoUserLog />
+          ) : (
+            <InfoUserAuthor authorInfo={authorInfo} />
+          )}
         </div>
       </>
     )

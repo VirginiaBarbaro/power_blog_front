@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { ArticleProps } from "../types/article";
 import NavigationBar from "../components/NavigationBar";
@@ -13,8 +13,14 @@ import {
   DrawerContent,
   DrawerCloseButton,
 } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
-function SingleArticle() {
+function ArticlePage() {
+  const navigate = useNavigate();
+
+  const loggedUser = useSelector((state: RootState) => state.token);
+
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
@@ -24,6 +30,7 @@ function SingleArticle() {
   const { id } = useParams();
 
   const [comments, setComments] = useState<CommentProps[]>([]);
+  const [isFavourite, setIsFavourite] = useState<boolean>(false);
   const [article, setArticle] = useState<ArticleProps>();
 
   useEffect(() => {
@@ -37,6 +44,12 @@ function SingleArticle() {
     getArticleInfo();
   }, [id]);
 
+  const handleProfileAuthor = () => {
+    if (article?.user) {
+      navigate("/profile", { state: article?.user });
+    }
+  };
+
   useEffect(() => {
     const getComments = async () => {
       const response = await axios({
@@ -46,11 +59,26 @@ function SingleArticle() {
           articleId: id,
         },
       });
-      console.log(response.data);
       setComments(response.data);
     };
     getComments();
   }, [id]);
+
+  const handleSaveArticleAsFavourite = async () => {
+    try {
+      const response = await axios({
+        headers: {
+          Authorization: `Bearer ${loggedUser.token}`,
+        },
+        method: "post",
+        url: `${import.meta.env.VITE_APP_API_URL}/favourites/${id}`,
+      });
+      console.log(response.data);
+      setIsFavourite(!isFavourite);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return article && comments ? (
     <>
@@ -89,11 +117,9 @@ function SingleArticle() {
             </div>
           </li>
           <div className="flex items-center space-x-3 mt-4 btn-profile-box text-sm">
-            <Link to={"#"} className="to-profile">
-              <button type="button" className="btn-to-profile px-4">
-                Profile
-              </button>
-            </Link>
+            <div className="to-profile" onClick={handleProfileAuthor}>
+              <button className="btn-to-profile px-4">Profile</button>
+            </div>
           </div>
         </ul>
         <img
@@ -123,11 +149,19 @@ function SingleArticle() {
               </span>
             </button>
           </div>
-          <div className="ml-auto cursor-pointer">
-            <span className="mr-2 text-dark-grey hover:text-dark-black hover:font-bold ">
+          <div
+            className="ml-auto cursor-pointer"
+            onClick={handleSaveArticleAsFavourite}
+          >
+            <span className="mr-2 text-dark-grey hover:text-dark-black hover:font-bold">
+              {" "}
               save
             </span>
-            <i className="fa-regular fa-bookmark text-electric-blue"></i>
+            <i
+              className={`fa-${
+                isFavourite ? "solid" : "regular"
+              } fa-bookmark text-electric-blue`}
+            ></i>
           </div>
         </div>
 
@@ -197,4 +231,4 @@ function SingleArticle() {
   );
 }
 
-export default SingleArticle;
+export default ArticlePage;

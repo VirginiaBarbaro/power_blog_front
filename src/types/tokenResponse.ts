@@ -1,4 +1,10 @@
 export interface Token {
   token: string | null;
-  author: string | null;
+  id: number;
+  email: string;
+  firstname: string;
+  lastname: string;
+  username: string;
+  isAdmin: boolean;
+  avatar: string;
 }

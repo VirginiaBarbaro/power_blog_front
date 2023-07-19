@@ -1,9 +1,52 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FormEvent, useState } from "react";
 import "../style/authForm.css";
-import { UserLogin } from "../types/user";
+import { useDispatch, useSelector } from "react-redux";
+import { setToken } from "../redux/slices/tokenSlice";
+import { RootState } from "../redux/store";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 function SignIn() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const invalidCredentials = () => toast.error("Invalid Credentials!");
+  const userNotFound = () => toast.error("You are not registred yet!");
+
+  const token = useSelector((state: RootState) => state.token);
+
+  const handleUserLogin = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    try {
+      const response = await axios({
+        headers: {
+          Authorization: `bearer: ${token}`,
+        },
+        method: "post",
+        url: `${import.meta.env.VITE_APP_API_URL}/auth/users`,
+        data: {
+          email,
+          password,
+        },
+      });
+
+      if (response.data.message === "Invalid Credentials!") {
+        invalidCredentials();
+      } else if (response.data.message === "User not found") {
+        userNotFound();
+      } else {
+        dispatch(setToken(response.data));
+        navigate("/home");
+      }
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="mx-auto flex justify-center items-center h-screen hero-image">
@@ -20,7 +63,7 @@ function SignIn() {
             </Link>
           </div>
         </div>
-        <form>
+        <form onSubmit={(event) => handleUserLogin(event)}>
           <div className="user-box grid md:grid-cols-2 md:gap-6">
             <div className="user-box">
               <input
@@ -29,6 +72,8 @@ function SignIn() {
                 name="email"
                 id="email"
                 required={true}
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
               />
               <label>Email</label>
             </div>
@@ -38,7 +83,9 @@ function SignIn() {
                 type="password"
                 name="password"
                 id="password"
+                value={password}
                 required={true}
+                onChange={(event) => setPassword(event.target.value)}
               />
               <label>Password</label>
             </div>

@@ -12,3 +12,7 @@ export interface UserLogin {
   email: string;
   password: string;
 }
+
+export interface AuthorInfo {
+  authorInfo: UserProps;
+}

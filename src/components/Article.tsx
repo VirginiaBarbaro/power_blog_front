@@ -12,7 +12,6 @@ function Article() {
         method: "get",
         url: `${import.meta.env.VITE_APP_API_URL}/articles`,
       });
-      console.log(response.data);
       setArticles(response.data);
     };
     getArticles();
@@ -31,7 +30,10 @@ function Article() {
     <>
       <div className="container grid gap-8 sm:grid-cols-2 md:grid-cols-2 md:p-4 lg:grid-cols-3 mx-auto pb-8">
         {articles.map((article: ArticleProps) => (
-          <div className="max-w-sm rounded-lg mx-auto article-box">
+          <div
+            className="max-w-sm rounded-lg mx-auto article-box"
+            key={article.id}
+          >
             <img
               className="rounded-t-lg article-image"
               src={`${import.meta.env.VITE_APP_API_URL}/${article.image.replace(

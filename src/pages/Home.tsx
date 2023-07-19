@@ -1,10 +1,10 @@
 import Article from "../components/Article";
-import Navbar from "../components/NavigationBar";
+import NavigationBar from "../components/NavigationBar";
 
 function Home() {
   return (
     <>
-      <Navbar />
+      <NavigationBar />
       <div className="mt-24">
         <Article />
       </div>

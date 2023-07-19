@@ -99,9 +99,13 @@ function NavigationBar() {
                 label={
                   <Avatar
                     alt="User settings"
-                    img={`${import.meta.env.VITE_APP_API_URL}${
-                      loggedUser.avatar
-                    }`}
+                    img={
+                      loggedUser.token
+                        ? `${import.meta.env.VITE_APP_API_URL}${
+                            loggedUser.avatar
+                          }`
+                        : "/no_login.png"
+                    }
                     rounded
                   />
                 }

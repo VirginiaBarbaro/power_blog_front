@@ -7,4 +7,5 @@ export interface Token {
   username: string;
   isAdmin: boolean;
   avatar: string;
+  bio: string;
 }

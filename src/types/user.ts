@@ -6,6 +6,7 @@ export interface UserProps {
   email: string;
   avatar: string;
   isAdmin: boolean;
+  bio: string;
 }
 
 export interface UserLogin {

@@ -16,8 +16,7 @@ function UserProfile() {
     loggedUser && (
       <>
         <NavigationBar />
-        {/* <div className="border sm:col-span-2">columna 1</div> */}
-        <div className="container border mx-auto mt-28">
+        <div className="container mx-auto mt-28">
           {authorInfo.id === loggedUser.id ? (
             <InfoUserLog />
           ) : (

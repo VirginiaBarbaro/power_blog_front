@@ -37,12 +37,12 @@ function InfoUserLog() {
   return (
     loggedUser &&
     userArticles && (
-      <div className="sm:grid sm:grid-cols-3 p-4">
-        <div className="border sm:col-span-1">
-          <figure className="flex flex-col items-center justify-center p-8 text-center bg-white border-b border-gray-200 rounded-t-lg md:rounded-t-none md:rounded-tl-lg md:border-r dark:bg-gray-800 dark:border-gray-700">
+      <div className="sm:grid sm:grid-cols-3 px-4">
+        <div className="sm:col-span-1">
+          <figure className="flex flex-col items-center justify-center p-8 text-center bg-white border-gray-200 rounded-t-lg md:rounded-t-none md:rounded-tl-lg dark:bg-gray-800 dark:border-gray-700 sticky top-16">
             <figcaption className="flex justify-center space-x-3">
               <img
-                className="rounded-full w-16 h-16"
+                className="rounded-full w-16 h-16 "
                 src={`${import.meta.env.VITE_APP_API_URL}/${loggedUser.avatar}`}
                 alt="profile picture"
               />
@@ -68,21 +68,28 @@ function InfoUserLog() {
           {userArticles.map((article: ArticleProps) => {
             return (
               <div
-                className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-3xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 mx-auto mb-6"
+                className="max-w-md mx-auto rounded-xl overflow-hidden md:max-w-2xl mb-8 card-user-article"
                 key={article.id}
               >
-                <img
-                  className="object-cover w-72 h-48  rounded-t-lg  md:rounded-none md:rounded-l-lg"
-                  src={`${import.meta.env.VITE_APP_API_URL}/${article.image}`}
-                  alt=""
-                />
-                <div className="flex flex-col justify-between px-4 leading-normal">
-                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                    {article.title}
-                  </h5>
-                  <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                    {truncateText(article.content, 10)}
-                  </p>
+                <div className="md:flex">
+                  <div className="md:shrink-0">
+                    <img
+                      className="h-48 w-full object-cover md:h-full md:w-48"
+                      src={`${import.meta.env.VITE_APP_API_URL}/${
+                        article.image
+                      }`}
+                      alt="Modern building architecture"
+                    />
+                  </div>
+                  <div className="px-4 pb-4 pt-2">
+                    <div className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                      {article.title}
+                    </div>
+
+                    <p className="mt-2 text-dark-grey-300">
+                      {truncateText(article.content, 10)}
+                    </p>
+                  </div>
                 </div>
               </div>
             );

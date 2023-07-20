@@ -9,3 +9,11 @@ export interface ArticleProps {
   createdAt: string;
   user: UserProps;
 }
+
+export interface UpdateArticleProps {
+  id: number;
+  title?: string;
+  content?: string;
+  headline?: string;
+  image?: string;
+}

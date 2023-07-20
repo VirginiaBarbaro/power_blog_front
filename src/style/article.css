@@ -155,3 +155,39 @@
   opacity: 0;
   transform: scale(0.1, 1);
 }
+
+/* InfoLogUser modal deleting own article */
+
+.btn-confirm-delete {
+  background-color: #0088cc !important;
+  color: #eeeeee !important;
+}
+
+.btn-confirm-delete:hover {
+  background: transparent !important;
+  border: 2px solid #0088cc;
+  color: #0088cc !important;
+}
+
+/* Btn confirm edit article  */
+
+.btn-modify-article {
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  border: 0;
+  background-color: #eeeeee;
+  box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+  letter-spacing: 1px;
+  transition: all 0.5s ease;
+}
+
+.btn-modify-article:hover {
+  letter-spacing: 2px;
+  background-color: #0088ccd1;
+  color: #eeeeee;
+  box-shadow: #0088cc 0px 7px 29px 0px;
+}
+
+.btn-modify-article:active {
+  transform: scaleX(0.9);
+}

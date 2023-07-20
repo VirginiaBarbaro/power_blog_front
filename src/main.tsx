@@ -11,6 +11,7 @@ import "./style/landing.css";
 import "./style/navbar.css";
 import "./style/article.css";
 
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>

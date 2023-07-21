@@ -125,7 +125,7 @@ function InfoUserLog() {
     userArticles && (
       <div className="sm:grid sm:grid-cols-3 px-4">
         <div className="sm:col-span-1">
-          <figure className="flex flex-col items-center justify-center p-8 text-center bg-white border-gray-200 rounded-t-lg md:rounded-t-none md:rounded-tl-lg dark:bg-gray-800 dark:border-gray-700 sticky top-16">
+          <figure className="flex flex-col items-center justify-center p-8 text-center bg-white border-gray-200 rounded-t-lg md:rounded-t-none md:rounded-tl-lg dark:bg-gray-800 dark:border-gray-700 sticky top-24 info-user-box">
             <figcaption className="flex justify-center space-x-3">
               <img
                 className="rounded-full w-16 h-16 "
@@ -167,7 +167,7 @@ function InfoUserLog() {
                       alt="Modern building architecture"
                     />
                   </div>
-                  <div className="px-4 pb-4 pt-2 w-full">
+                  <div className="px-4 pb-4 pt-2 w-full h-full">
                     <div className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                       {article.title}
                     </div>
@@ -193,8 +193,9 @@ function InfoUserLog() {
                         <DrawerOverlay />
                         <DrawerContent>
                           <DrawerCloseButton />
-                          <DrawerHeader>
-                            Edit your article {updateArticleId}
+                          <DrawerHeader className="flex justify-between border w-96">
+                            <div>Edit your article</div>
+                            <div>ID: {updateArticleId}</div>
                           </DrawerHeader>
                           <DrawerBody>
                             <form onSubmit={(e) => handleUpdateArticle(e)}>

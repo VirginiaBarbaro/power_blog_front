@@ -31,7 +31,7 @@ function Article() {
       <div className="container grid gap-8 sm:grid-cols-2 md:grid-cols-2 md:p-4 lg:grid-cols-3 mx-auto pb-8">
         {articles.map((article: ArticleProps) => (
           <div
-            className="max-w-sm rounded-lg mx-auto article-box"
+            className="max-w-xs rounded-lg mx-auto article-box"
             key={article.id}
           >
             <img

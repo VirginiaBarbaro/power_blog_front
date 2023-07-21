@@ -156,7 +156,13 @@
   transform: scale(0.1, 1);
 }
 
-/* InfoLogUser modal deleting own article */
+/* InfoLogUser */
+
+.card-user-article {
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px,
+    rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px,
+    rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+}
 
 .btn-confirm-delete {
   background-color: #0088cc !important;
@@ -168,8 +174,6 @@
   border: 2px solid #0088cc;
   color: #0088cc !important;
 }
-
-/* Btn confirm edit article  */
 
 .btn-modify-article {
   padding: 0.8rem 2rem;
@@ -190,4 +194,10 @@
 
 .btn-modify-article:active {
   transform: scaleX(0.9);
+}
+
+.info-user-box {
+  border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }

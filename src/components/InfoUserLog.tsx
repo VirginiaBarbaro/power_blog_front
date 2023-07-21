@@ -48,7 +48,7 @@ function InfoUserLog() {
   const [title, setTitle] = useState<string>("");
   const [headline, setHeadline] = useState<string>("");
   const [content, setContent] = useState<string>("");
-  const [image, setImage] = useState<string>("");
+  const [image, setImage] = useState<File | null>(null);
 
   useEffect(() => {
     const getUserArticles = async () => {
@@ -82,7 +82,10 @@ function InfoUserLog() {
     formData.append("title", title);
     formData.append("headline", headline);
     formData.append("content", content);
-    formData.append("image", image);
+
+    if (image !== null) {
+      formData.append("image", image);
+    }
 
     await axios({
       headers: {
@@ -93,6 +96,13 @@ function InfoUserLog() {
       url: `${import.meta.env.VITE_APP_API_URL}/articles/${updateArticleId}`,
       data: formData,
     });
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setImage(file);
+    }
   };
 
   const handleDeleteArticle = async (deleteArticleId: string) => {
@@ -151,9 +161,9 @@ function InfoUserLog() {
                   <div className="md:shrink-0">
                     <img
                       className="h-48 w-full object-cover md:h-full md:w-48"
-                      src={`${import.meta.env.VITE_APP_API_URL}/${
-                        article.image
-                      }`}
+                      src={`${
+                        import.meta.env.VITE_APP_API_URL
+                      }/${article.image.replace("public\\", "")}`}
                       alt="Modern building architecture"
                     />
                   </div>
@@ -248,6 +258,7 @@ function InfoUserLog() {
                                   name="image"
                                   id="image"
                                   required={true}
+                                  onChange={handleFileChange}
                                 />
                               </div>
                               <div className="flex justify-center mt-10">

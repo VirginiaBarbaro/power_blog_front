@@ -201,3 +201,29 @@
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
     rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
+
+@media (min-width: 250px) and (max-width: 504px) {
+  .info-user-box {
+    width: 100%;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+@media (min-width: 504.01px) and (max-width: 640.24px) {
+  .info-user-box {
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (min-width: 640.25px) and (max-width: 1280px) {
+  .info-user-box {
+    width: 90%;
+    margin-right: 2rem;
+  }
+}

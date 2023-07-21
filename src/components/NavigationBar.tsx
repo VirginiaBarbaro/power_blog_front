@@ -35,7 +35,7 @@ function NavigationBar() {
 
   const handleUserLogProfile = () => {
     if (loggedUser) {
-      navigate("/profile", { state: loggedUser });
+      navigate(`/profile/${loggedUser.id}`, { state: loggedUser });
     }
   };
 

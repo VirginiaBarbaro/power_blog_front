@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { ArticleProps } from "../types/article";
 import NavigationBar from "../components/NavigationBar";
@@ -46,7 +46,7 @@ function ArticlePage() {
 
   const handleProfileAuthor = () => {
     if (article?.user) {
-      navigate("/profile", { state: article?.user });
+      navigate(`/profile/${article.user.id}`, { state: article?.user });
     }
   };
 

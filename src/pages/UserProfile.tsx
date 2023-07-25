@@ -1,4 +1,4 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import NavigationBar from "../components/NavigationBar";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
@@ -9,11 +9,8 @@ function UserProfile() {
   const { id } = useParams();
 
   const loggedUser = useSelector((state: RootState) => state.token);
-  const location = useLocation();
 
-  const authorInfo = location.state;
-
-  return authorInfo && loggedUser ? (
+  return loggedUser ? (
     <>
       <NavigationBar />
       <div className="container mx-auto mt-28">

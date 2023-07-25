@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { ArticleProps } from "../types/article";
 import NavigationBar from "../components/NavigationBar";
@@ -17,8 +17,6 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 
 function ArticlePage() {
-  const navigate = useNavigate();
-
   const loggedUser = useSelector((state: RootState) => state.token);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -39,16 +37,11 @@ function ArticlePage() {
         method: "get",
         url: `${import.meta.env.VITE_APP_API_URL}/articles/${id}`,
       });
+      console.log(response.data);
       setArticle(response.data);
     };
     getArticleInfo();
   }, [id]);
-
-  const handleProfileAuthor = () => {
-    if (article?.user) {
-      navigate(`/profile/${article.user.id}`, { state: article?.user });
-    }
-  };
 
   useEffect(() => {
     const getComments = async () => {
@@ -116,11 +109,13 @@ function ArticlePage() {
               </div>
             </div>
           </li>
-          <div className="flex items-center space-x-3 mt-4 btn-profile-box text-sm">
-            <div className="to-profile" onClick={handleProfileAuthor}>
-              <button className="btn-to-profile px-4">Profile</button>
+          <Link to={`/profile/${article.user.id}`}>
+            <div className="flex items-center space-x-3 mt-4 btn-profile-box text-sm">
+              <div className="to-profile">
+                <button className="btn-to-profile px-4">Profile</button>
+              </div>
             </div>
-          </div>
+          </Link>
         </ul>
         <img
           src={`${import.meta.env.VITE_APP_API_URL}/${article.image.replace(

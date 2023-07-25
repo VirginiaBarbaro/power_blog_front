@@ -41,7 +41,7 @@ function ArticleCard() {
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-125"
                     src={`${
                       import.meta.env.VITE_APP_API_URL
-                    }/${article.image.replace("public\\", "")}`}
+                    }/${article.image.replace("public", "")}`}
                     alt=""
                   />
                 </div>

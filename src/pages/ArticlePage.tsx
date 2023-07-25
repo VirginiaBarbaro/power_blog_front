@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
+import Footer from "../components/Footer";
 
 function ArticlePage() {
   const loggedUser = useSelector((state: RootState) => state.token);
@@ -57,7 +58,7 @@ function ArticlePage() {
     getComments();
   }, [id]);
 
-  const handleSaveArticleAsFavourite = async () => {
+  const handleSaveArticleAsFavourite = async (id: number) => {
     try {
       const response = await axios({
         headers: {
@@ -94,7 +95,7 @@ function ArticlePage() {
                   className="w-12 h-12 rounded-full mr-5"
                   src={`${
                     import.meta.env.VITE_APP_API_URL
-                  }/${article.user.avatar.replace("public\\", "")}`}
+                  }/${article.user.avatar.replace("public", "")}`}
                   alt="Neil image"
                 />
               </div>
@@ -144,10 +145,7 @@ function ArticlePage() {
               </span>
             </button>
           </div>
-          <div
-            className="ml-auto cursor-pointer"
-            onClick={handleSaveArticleAsFavourite}
-          >
+          <div className="ml-auto cursor-pointer">
             <span className="mr-2 text-dark-grey hover:text-dark-black hover:font-bold">
               {" "}
               save
@@ -156,6 +154,7 @@ function ArticlePage() {
               className={`fa-${
                 isFavourite ? "solid" : "regular"
               } fa-bookmark text-electric-blue`}
+              onClick={() => handleSaveArticleAsFavourite(article.id)}
             ></i>
           </div>
         </div>
@@ -220,6 +219,7 @@ function ArticlePage() {
           </>
         </Drawer>
       </div>
+      <Footer />
     </>
   ) : (
     <p className="text-center">Loading...</p>

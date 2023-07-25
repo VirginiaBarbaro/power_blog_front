@@ -24,6 +24,7 @@ import {
   DrawerContent,
   DrawerCloseButton,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 interface ArticleUserProfileProps {
   userId: string;
@@ -130,23 +131,27 @@ function ArticleUserProfile({ userId }: ArticleUserProfileProps) {
           >
             <div className="md:flex">
               <div className="md:shrink-0">
-                <img
-                  className="h-48 w-full object-cover md:h-full md:w-48"
-                  src={`${
-                    import.meta.env.VITE_APP_API_URL
-                  }/${article.image.replace("public\\", "")}`}
-                  alt="Modern building architecture"
-                />
+                <Link to={`/article/${article.id}`}>
+                  <img
+                    className="h-48 w-full object-cover md:h-full md:w-48"
+                    src={`${
+                      import.meta.env.VITE_APP_API_URL
+                    }/${article.image.replace("public", "")}`}
+                    alt="Modern building architecture"
+                  />
+                </Link>
               </div>
               <div className="px-4 pt-1 w-full flex flex-col justify-around">
-                <div className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white pb-2">
-                  {article.title}
-                </div>
-                <div className="">
-                  <p className="text-dark-grey-300">
-                    {truncateText(article.content, 10)}
-                  </p>
-                </div>
+                <Link to={`/article/${article.id}`}>
+                  <div className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white pb-2">
+                    {article.title}
+                  </div>
+                  <div className="">
+                    <p className="text-dark-grey-300">
+                      {truncateText(article.content, 10)}
+                    </p>
+                  </div>
+                </Link>
                 {article.userId === loggedUser.id ? (
                   <div className="mt-4 p-2 flex justify-between">
                     <button

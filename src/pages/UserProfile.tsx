@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import InfoUserProfile from "../components/InfoUserProfile";
 import ArticleUserProfile from "../components/ArticleUserProfile";
+import Footer from "../components/Footer";
 
 function UserProfile() {
   const { id } = useParams();
@@ -23,6 +24,7 @@ function UserProfile() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   ) : (
     <p>Loading...</p>

@@ -74,12 +74,6 @@ function NavigationBar() {
                     >
                       Post
                     </Link>
-                    <Link
-                      to="#"
-                      className="element-navbar block md:bg-transparent py-2 pl-3 pr-4 md:p-0"
-                    >
-                      Contact
-                    </Link>
                   </ul>
                 </div>
               </Navbar.Collapse>

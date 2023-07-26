@@ -8,6 +8,7 @@ import SignUp from "./pages/SignUp";
 import FavouriteArticle from "./pages/FavouriteArticle";
 import UserProfile from "./pages/UserProfile";
 import ProfileSettingsForm from "./pages/ProfileSettingsForm";
+import DataAccessForm from "./pages/DataAccessForm";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/favourite/article" element={<FavouriteArticle />} />
         <Route path="/profile/:id" element={<UserProfile />} />
         <Route path="/settings/profile/:id" element={<ProfileSettingsForm />} />
+        <Route path="/settings/data/:id" element={<DataAccessForm />} />
         {/* 404 Page */}
         <Route path="*" element={<p>Erorr 404 page not found</p>} />
       </Routes>

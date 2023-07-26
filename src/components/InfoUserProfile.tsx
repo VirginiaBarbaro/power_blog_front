@@ -48,13 +48,24 @@ function InfoUserProfile() {
           </div>
         </figcaption>
         {loggedUser.id === user.id ? (
-          <Link to={`/settings/profile/${loggedUser.id}`}>
-            <button className="mt-4 inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-dark-grey to-semidark-grey group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:outline-none active:scale-90">
-              <span className="relative px-3 py-2 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                Edit Profile
-              </span>
-            </button>
-          </Link>
+          <>
+            <div className="ms-auto w-auto">
+              <Link to={`/settings/profile/${loggedUser.id}`}>
+                <button className="mt-4 inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-dark-grey to-semidark-grey group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:outline-none active:scale-90">
+                  <span className="relative px-3 py-2 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                    Edit Profile
+                  </span>
+                </button>
+              </Link>
+              <Link to={`/settings/data/${loggedUser.id}`} className="ml-4">
+                <button className="mt-4 inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-dark-grey to-semidark-grey group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:outline-none active:scale-90">
+                  <span className="relative px-3 py-2 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                    Data access
+                  </span>
+                </button>
+              </Link>
+            </div>
+          </>
         ) : null}
       </figure>
     </div>

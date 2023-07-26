@@ -210,7 +210,7 @@ function ArticlePage() {
                       This article haven't comments yet!
                     </h2>
                     <h2 className="no-comments-message text-center">
-                      Be te first to comment!
+                      Be the first to comment!
                     </h2>
                   </div>
                 )}

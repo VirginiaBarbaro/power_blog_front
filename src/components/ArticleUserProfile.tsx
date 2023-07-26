@@ -1,6 +1,6 @@
 import { useEffect, useState, FormEvent } from "react";
 import axios from "axios";
-import { ArticleProps } from "../types/article";
+import { Article, ArticleProps } from "../types/article";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 
@@ -45,7 +45,7 @@ function ArticleUserProfile({ userId }: ArticleUserProfileProps) {
 
   const loggedUser = useSelector((state: RootState) => state.token);
 
-  const [userArticles, setUserArticles] = useState([]);
+  const [userArticles, setUserArticles] = useState<ArticleProps[]>([]);
 
   const [deleteArticleId, setDeleteArticleId] = useState<string>("");
   const [updateArticleId, setUpdateArticleId] = useState<string>("");
@@ -62,7 +62,12 @@ function ArticleUserProfile({ userId }: ArticleUserProfileProps) {
         url: `${import.meta.env.VITE_APP_API_URL}/articles/user/${userId}`,
       });
       console.log(response.data);
-      setUserArticles(response.data);
+      const sortedArticles = response.data.sort((a: Article, b: Article) => {
+        const dateA = new Date(a.createdAt);
+        const dateB = new Date(b.createdAt);
+        return dateB.getTime() - dateA.getTime();
+      });
+      setUserArticles(sortedArticles);
     };
     getUserArticles();
   }, [userId]);
@@ -133,7 +138,7 @@ function ArticleUserProfile({ userId }: ArticleUserProfileProps) {
               <div className="md:shrink-0">
                 <Link to={`/article/${article.id}`}>
                   <img
-                    className="h-48 w-full object-cover md:h-full md:w-48"
+                    className="h-48 w-full object-cover md:h-48 md:w-48"
                     src={`${
                       import.meta.env.VITE_APP_API_URL
                     }/${article.image.replace("public", "")}`}

@@ -98,6 +98,28 @@
 
 /* End No comments ArticlePage */
 
+/* No favourite articles  */
+
+.no-favourite-article {
+  margin-top: 1rem;
+  padding: 1rem 1.2rem 1rem 1.2rem;
+  background-color: #eeeeee;
+}
+
+.no-favourite-article-title {
+  margin-bottom: 0.8rem;
+  font-size: 1.7rem;
+  color: #666666;
+}
+
+.no-favourite-article-message {
+  color: #000000;
+  font-size: 1rem;
+  font-weight: 200;
+}
+
+/* End No favourite Article  */
+
 .to-profile {
   text-align: center;
   cursor: pointer;

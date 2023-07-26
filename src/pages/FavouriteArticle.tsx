@@ -77,6 +77,16 @@ function FavouriteArticle() {
             );
           })}
         </div>
+        {favouritesArticles.length === 0 && (
+          <div className="no-favourite-article rounded mx-auto">
+            <h2 className="no-favourite-article-title text-center">
+              You haven't saved any favorite articles yet!
+            </h2>
+            <h2 className="no-favourite-article-message text-center">
+              Start saving your favorite articles now!
+            </h2>
+          </div>
+        )}
       </div>
       <Footer />
     </>

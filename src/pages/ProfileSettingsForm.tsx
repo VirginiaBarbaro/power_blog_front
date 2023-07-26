@@ -149,7 +149,7 @@ function ProfileSettingsForm() {
             <div className="relative z-0 w-full mb-6 group">
               <input
                 type="file"
-                name="vatar"
+                name="avatar"
                 id="avatar"
                 onChange={handleFileChange}
               />

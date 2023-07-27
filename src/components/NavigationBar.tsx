@@ -261,7 +261,6 @@ function NavigationBar() {
                 <Navbar.Toggle />
               </div>
               <Dropdown
-                // inline
                 label={
                   <Avatar
                     alt="User avatar"
@@ -286,6 +285,11 @@ function NavigationBar() {
                         {loggedUser.email}
                       </span>
                     </Dropdown.Header>
+                    {loggedUser.isAdmin === true ? (
+                      <Link to={"#"}>
+                        <Dropdown.Item>Admin</Dropdown.Item>
+                      </Link>
+                    ) : null}
                     <Link to={`/profile/${loggedUser.id}`}>
                       <Dropdown.Item>Profile</Dropdown.Item>
                     </Link>

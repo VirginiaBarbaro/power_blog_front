@@ -1,18 +1,21 @@
 import { Link } from "react-router-dom";
 
 function Footer() {
+  const handleScrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <>
       <footer className="bg-white rounded-lg dark:bg-gray-900 m-4 bottom-0 left-0 w-full relative">
         <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
           <div className="sm:flex sm:items-center sm:justify-between">
-            <Link to={"/home"}>
-              <img
-                src="/blog_logo.png"
-                className="h-10 w-28 object-cover"
-                alt="logo_power_blog"
-              />
-            </Link>
+            <button onClick={handleScrollToTop} className="btn-scroll-top">
+              <i className="fa-solid fa-circle-chevron-up text-4xl text-electric-blue"></i>
+            </button>
             <div className="flex flex-wrap items-center mx-auto text-center max-[639px]:my-3">
               <Link to={"https://github.com/VirginiaBarbaro"} target="_blank">
                 <i className="fa-brands fa-square-github text-3xl mx-2 text-dark-grey hover:text-electric-blue"></i>
@@ -37,6 +40,7 @@ function Footer() {
                 <Link
                   to={"https://virginia-barbaro.vercel.app/"}
                   className="mr-4 hover:underline hover:text-electric-blue md:mr-6 "
+                  target="_blank"
                 >
                   Portfolio
                 </Link>

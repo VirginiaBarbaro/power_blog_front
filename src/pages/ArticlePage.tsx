@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, FormEvent } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { ArticleProps } from "../types/article";
 import NavigationBar from "../components/NavigationBar";
 import { CommentProps } from "../types/comment";
 import { formatDistanceToNow } from "date-fns";
+import { ToastContainer, toast } from "react-toastify";
 import {
   Drawer,
   DrawerBody,
@@ -13,6 +14,15 @@ import {
   DrawerContent,
   DrawerCloseButton,
 } from "@chakra-ui/react";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import Footer from "../components/Footer";
@@ -20,10 +30,14 @@ import Footer from "../components/Footer";
 function ArticlePage() {
   const loggedUser = useSelector((state: RootState) => state.token);
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpening, setIsOpening] = useState(false);
+
+  const commentCreated = () => toast.success("Comment published successfully!");
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleClick = () => {
-    setIsOpen(true);
+    setIsOpening(true);
   };
 
   const { id } = useParams();
@@ -31,6 +45,7 @@ function ArticlePage() {
   const [comments, setComments] = useState<CommentProps[]>([]);
   const [isFavourite, setIsFavourite] = useState<boolean>(false);
   const [article, setArticle] = useState<ArticleProps>();
+  const [content, setContent] = useState<string>("");
 
   useEffect(() => {
     const getArticleInfo = async () => {
@@ -74,10 +89,34 @@ function ArticlePage() {
     }
   };
 
+  const handleCreateComment = async (e: FormEvent) => {
+    e.preventDefault();
+
+    const response = await axios({
+      headers: {
+        Authorization: `Bearer ${loggedUser.token}`,
+      },
+      method: "post",
+      url: `${import.meta.env.VITE_APP_API_URL}/comments/${id}`,
+      data: {
+        content,
+      },
+    });
+
+    if (response.data.message === "Comment successfully created!") {
+      commentCreated();
+      setTimeout(() => {
+        onClose();
+        window.location.reload();
+      }, 3000);
+    }
+  };
+
   return article && comments ? (
     <>
       <NavigationBar />
       <div className="container px-4 max-w-6xl mx-auto mt-32 pb-5 grid place-content-center">
+        <ToastContainer className="toastify--success" />
         <h2 className="text-4xl font-extrabold dark:text-white">
           {article.title}
         </h2>
@@ -120,7 +159,7 @@ function ArticlePage() {
         </ul>
         <img
           src={`${import.meta.env.VITE_APP_API_URL}/${article.image.replace(
-            "public\\",
+            "public",
             ""
           )}`}
           className="w-full h-auto max-w-4xl rounded-lg mt-10"
@@ -138,13 +177,52 @@ function ArticlePage() {
             </button>
           </div>
           <div>
-            <button>
+            <button onClick={onOpen}>
               <i className="fa-solid fa-marker text-electric-blue"></i>
               <span className="ml-2 text-dark-grey hover:text-dark-black hover:font-bold">
-                write
+                write comment
               </span>
             </button>
           </div>
+
+          <Modal
+            isCentered
+            blockScrollOnMount={false}
+            isOpen={isOpen}
+            onClose={onClose}
+            size={"3xl"}
+          >
+            <ModalOverlay />
+            <ModalContent>
+              <ModalHeader>
+                Write a comment for article ID: {article.id}
+              </ModalHeader>
+              <ModalCloseButton />
+              <ModalBody>
+                <form onSubmit={(e) => handleCreateComment(e)}>
+                  <div>
+                    <div className="relative z-0 w-full mb-8 group">
+                      <textarea
+                        name="content"
+                        id="content"
+                        className="block py-2.5 px-0 w-full text-md text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 focus:outline-none focus:ring-0 peer"
+                        placeholder=" "
+                        required
+                        onChange={(e) => setContent(e.target.value)}
+                      />
+                      <label className="peer-focus:font-medium absolute text-md text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                        Content
+                      </label>
+                    </div>
+                    <div className="flex justify-center my-10">
+                      <button className="btn-modify-article">Confirm</button>
+                    </div>
+                  </div>
+                </form>
+              </ModalBody>
+            </ModalContent>
+          </Modal>
+
           <div className="ml-auto cursor-pointer">
             <span className="mr-2 text-dark-grey hover:text-dark-black hover:font-bold">
               {" "}
@@ -159,7 +237,11 @@ function ArticlePage() {
           </div>
         </div>
 
-        <Drawer onClose={() => setIsOpen(false)} isOpen={isOpen} size="sm">
+        <Drawer
+          onClose={() => setIsOpening(false)}
+          isOpen={isOpening}
+          size="sm"
+        >
           <>
             <DrawerOverlay />
             <DrawerContent>

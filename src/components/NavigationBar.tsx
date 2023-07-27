@@ -143,12 +143,6 @@ function NavigationBar() {
                     >
                       Home
                     </Link>
-                    {/*  <Link
-                      to="#"
-                      className="element-navbar block md:bg-transparent py-2 pl-3 pr-4 md:p-0"
-                    >
-                      Categories
-                    </Link> */}
                     <Dropdown inline label="Categories">
                       {categories.map((categoryList: Category) => (
                         <Link

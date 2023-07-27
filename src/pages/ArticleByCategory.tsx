@@ -34,8 +34,10 @@ function ArticleByCategory() {
   return categories && categories.articles ? (
     <>
       <NavigationBar />
-      <h4 className="text-center mt-28 text-3xl">{categories.name}</h4>
-      <div className="container grid gap-8 sm:grid-cols-2 md:grid-cols-2 md:p-4 lg:grid-cols-3 mx-auto pb-8 mt-10">
+      <h4 className="mt-28 text-3xl font-semibold text-center">
+        {categories.name}
+      </h4>
+      <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-2 md:p-4 lg:grid-cols-3 mx-auto pb-8 mt-10">
         {categories.articles.map((article) => {
           return (
             <div

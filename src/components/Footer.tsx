@@ -10,7 +10,7 @@ function Footer() {
               <img
                 src="/blog_logo.png"
                 className="h-10 w-28 object-cover"
-                alt="Flowbite Logo"
+                alt="logo_power_blog"
               />
             </Link>
             <div className="flex flex-wrap items-center mx-auto text-center max-[639px]:my-3">

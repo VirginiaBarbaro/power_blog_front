@@ -6,6 +6,7 @@ export interface ArticleProps {
   headline: string;
   image: string;
   userId: number | null;
+  categoryId: number;
   createdAt: string;
   user: UserProps;
 }

@@ -131,7 +131,7 @@ function ArticleUserProfile({ userId }: ArticleUserProfileProps) {
       {userArticles.map((article: ArticleProps) => {
         return (
           <div
-            className="max-w-md mx-auto rounded-xl overflow-hidden md:max-w-2xl mb-8 card-user-article"
+            className="max-w-md mx-auto rounded-xl overflow-hidden md:max-w-2xl mb-8 card-user-article "
             key={article.id}
           >
             <div className="md:flex">

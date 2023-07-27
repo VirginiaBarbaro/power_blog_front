@@ -1,5 +1,5 @@
 import { useState, useEffect, FormEvent } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Avatar, Dropdown } from "flowbite-react";
 import { Navbar } from "flowbite-react";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,18 +16,23 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import { Category } from "../types/category";
 
 function NavigationBar() {
+  const [categories, setCategories] = useState<Category[]>([]);
   const [isScrolling, setIsScrolling] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("");
   const [headline, setHeadline] = useState<string>("");
   const [content, setContent] = useState<string>("");
+  const [categoryId, setCategoryId] = useState<number>();
   const [image, setImage] = useState<File | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
 
   const loggedUser = useSelector((state: RootState) => state.token);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = () => {
     dispatch(setToken({ token: null, user: null }));
@@ -48,6 +53,21 @@ function NavigationBar() {
     }
   };
 
+  useEffect(() => {
+    const getCategories = async () => {
+      const response = await axios({
+        method: "get",
+        url: `${import.meta.env.VITE_APP_API_URL}/categories`,
+      });
+      setCategories(response.data);
+    };
+    getCategories();
+
+    if (selectedCategory) {
+      window.location.href = `/category/${selectedCategory}`;
+    }
+  }, [location, selectedCategory]);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const articleCreated = () => toast.success("The article has been created!");
@@ -59,6 +79,10 @@ function NavigationBar() {
     formData.append("title", title);
     formData.append("headline", headline);
     formData.append("content", content);
+    formData.append(
+      "categoryId",
+      categoryId !== undefined ? categoryId.toString() : ""
+    );
 
     if (image !== null) {
       formData.append("image", image);
@@ -89,7 +113,8 @@ function NavigationBar() {
   };
 
   return (
-    loggedUser && (
+    loggedUser &&
+    categories && (
       <>
         <Navbar
           className={`dark:bg-gray-900 fixed w-full z-20 top-0 left-0 py-1  ${
@@ -118,12 +143,24 @@ function NavigationBar() {
                     >
                       Home
                     </Link>
-                    <Link
+                    {/*  <Link
                       to="#"
                       className="element-navbar block md:bg-transparent py-2 pl-3 pr-4 md:p-0"
                     >
                       Categories
-                    </Link>
+                    </Link> */}
+                    <Dropdown inline label="Categories">
+                      {categories.map((categoryList: Category) => (
+                        <Link
+                          to={`/category/${categoryList.name}`}
+                          onClick={() => setSelectedCategory(categoryList.name)}
+                        >
+                          <Dropdown.Item key={categoryList.id}>
+                            {categoryList.name}
+                          </Dropdown.Item>
+                        </Link>
+                      ))}
+                    </Dropdown>
                     <li
                       onClick={onOpen}
                       className="element-navbar block md:bg-transparent py-2 pl-3 pr-4 md:p-0 cursor-pointer"
@@ -186,6 +223,22 @@ function NavigationBar() {
                                 <label className="peer-focus:font-medium absolute text-md text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                                   Content
                                 </label>
+                              </div>
+                              <div className="relative z-0 w-full mb-6 group">
+                                <select
+                                  onChange={(e) =>
+                                    setCategoryId(+e.target.value)
+                                  }
+                                >
+                                  {categories.map((category) => {
+                                    <span key={category.id}></span>;
+                                    return (
+                                      <option value={category.id}>
+                                        Category: {category.name}
+                                      </option>
+                                    );
+                                  })}
+                                </select>
                               </div>
                               <div className="relative z-0 w-full mb-6 group">
                                 <input

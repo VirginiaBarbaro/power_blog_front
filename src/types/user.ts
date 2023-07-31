@@ -9,6 +9,7 @@ export interface UserProps {
   createdAt: string;
   updatedAt: string;
   bio: string;
+  articlesCount?: number;
 }
 
 export interface UserLogin {

@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 // import { setToken } from "../../redux/slices/tokenSlice";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 // import { Link, useNavigate } from "react-router-dom";
 
 function Sidebar() {
@@ -99,13 +100,16 @@ function Sidebar() {
               <p className=" text-white">{loggedUser.email}</p>
             </div>
           </div>
-
-          <div className="ml-2 text-white text-xl hover:bg-light-grey hover:rounded-l-md hover:text-electric-blue cursor-pointer py-3 px-3 mb-2">
-            <i className="fa-solid fa-chart-line mr-2"></i> Dashboard
-          </div>
-          <div className="ml-2 text-white text-xl hover:bg-light-grey hover:rounded-l-md hover:text-electric-blue cursor-pointer py-3 px-3 mb-2">
-            <i className="fa-solid fa-users mr-2"></i> Users
-          </div>
+          <Link to={"/admin/dashboard"}>
+            <div className="ml-2 text-white text-xl hover:bg-light-grey hover:rounded-l-md hover:text-electric-blue cursor-pointer py-3 px-3 mb-2">
+              <i className="fa-solid fa-chart-line mr-2"></i> Dashboard
+            </div>
+          </Link>
+          <Link to={"/admin/users"}>
+            <div className="ml-2 text-white text-xl hover:bg-light-grey hover:rounded-l-md hover:text-electric-blue cursor-pointer py-3 px-3 mb-2">
+              <i className="fa-solid fa-users mr-2"></i> Users
+            </div>
+          </Link>
           <div className="ml-2 text-white text-xl hover:bg-light-grey hover:rounded-l-md hover:text-electric-blue cursor-pointer py-3 px-3 mb-2">
             <i className="fa-solid fa-user-gear mr-2"></i> Admins
           </div>

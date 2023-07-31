@@ -38,7 +38,7 @@ function Article() {
             <img
               className="rounded-t-lg article-image"
               src={`${import.meta.env.VITE_APP_API_URL}/${article.image.replace(
-                "public\\",
+                "public",
                 ""
               )}`}
               alt=""

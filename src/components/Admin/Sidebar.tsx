@@ -24,7 +24,7 @@ function Sidebar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="bg-white py-3 fixed z-20 top-0 left-0 right-0">
+    <div className="shadow-md bg-white py-3 fixed z-20 top-0 left-0 right-0">
       <button
         className="ml-4 bg-electric-blue text-light-grey p-2 rounded-full"
         onClick={() => setOpen(true)}

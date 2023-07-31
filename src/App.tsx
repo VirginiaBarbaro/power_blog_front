@@ -10,6 +10,7 @@ import UserProfile from "./pages/UserProfile";
 import ProfileSettingsForm from "./pages/ProfileSettingsForm";
 import DataAccessForm from "./pages/DataAccessForm";
 import ArticleByCategory from "./pages/ArticleByCategory";
+import Dashboard from "./pages/Admin/Dashboard";
 
 function App() {
   return (
@@ -26,6 +27,8 @@ function App() {
         <Route path="/settings/profile/:id" element={<ProfileSettingsForm />} />
         <Route path="/settings/data/:id" element={<DataAccessForm />} />
         <Route path="/category/:name" element={<ArticleByCategory />} />
+        {/* ADMIN  */}
+        <Route path="/admin/dashboard" element={<Dashboard />} />
         {/* 404 Page */}
         <Route path="*" element={<p>Erorr 404 page not found</p>} />
       </Routes>

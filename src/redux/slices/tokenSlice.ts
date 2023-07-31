@@ -3,7 +3,7 @@ import { Token } from "../../types/tokenResponse";
 
 const initialState: Token = {
   token: null,
-  author: null,
+  user: null,
 };
 
 const tokenSlice = createSlice({

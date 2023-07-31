@@ -43,3 +43,9 @@ export interface UpdateArticleProps {
   headline?: string;
   image?: string;
 }
+
+export interface FavouriteArticle {
+  id: number;
+  userId: number;
+  articleId: number;
+}

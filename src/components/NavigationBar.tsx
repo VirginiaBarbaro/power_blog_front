@@ -286,7 +286,7 @@ function NavigationBar() {
                       </span>
                     </Dropdown.Header>
                     {loggedUser.isAdmin === true ? (
-                      <Link to={"#"}>
+                      <Link to={"/admin/dashboard"}>
                         <Dropdown.Item>Admin</Dropdown.Item>
                       </Link>
                     ) : null}

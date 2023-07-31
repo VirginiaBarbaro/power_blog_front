@@ -35,7 +35,7 @@ function SignIn() {
       });
 
       if (response.data.message === "Invalid credentials") {
-        return invalidCredentials();
+        invalidCredentials();
       } else {
         dispatch(setToken(response.data));
         navigate("/home");
@@ -48,7 +48,6 @@ function SignIn() {
 
   return (
     <>
-      <ToastContainer className="toastify--error" />
       <div className="mx-auto flex justify-center items-center h-screen hero-image">
         <div className="login-box rounded mx-auto login-box-mediaquery">
           <div className=" mb-10">
@@ -97,6 +96,7 @@ function SignIn() {
               </button>
             </center>
           </form>
+          <ToastContainer className="toastify--error" />
         </div>
       </div>
     </>

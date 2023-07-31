@@ -1,6 +1,6 @@
 import Sidebar from "../../components/Admin/Sidebar";
 import CategoriesCard from "../../components/Admin/dashboard/CategoriesCard";
-import LatestArticle from "../../components/Admin/dashboard/LatestArticle";
+import RecentArticle from "../../components/Admin/dashboard/RecentArticles";
 import LatestUsers from "../../components/Admin/dashboard/LatestUsers";
 import TopCategories from "../../components/Admin/dashboard/TopCategories";
 
@@ -18,7 +18,7 @@ function Dashboard() {
             <TopCategories />
           </div>
           <div className="grid col-span-1 max-[639px]:mx-auto mx-auto shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px]">
-            <LatestArticle />
+            <RecentArticle />
           </div>
         </div>
       </div>

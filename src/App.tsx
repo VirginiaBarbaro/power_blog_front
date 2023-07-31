@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 import Home from "./pages/Home";
 import ScrollToTop from "./components/utilities/ScrollToTop";
-import FullArticle from "./pages/ArticlePage";
+import ArticlePage from "./pages/ArticlePage";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import FavouriteArticle from "./pages/FavouriteArticle";
@@ -19,7 +19,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/article/:id" element={<FullArticle />} />
+        <Route path="/article/:id" element={<ArticlePage />} />
         <Route path="/login" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/favourite/article" element={<FavouriteArticle />} />

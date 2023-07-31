@@ -12,7 +12,6 @@ function TopCategories() {
         method: "get",
         url: `${import.meta.env.VITE_APP_API_URL}/categories`,
       });
-      console.log(response.data);
       setCategories(response.data);
     };
     getCategories();

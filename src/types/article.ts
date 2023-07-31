@@ -1,3 +1,4 @@
+import { CategoryProps } from "./category";
 import { UserProps } from "./user";
 export interface ArticleProps {
   id: number;
@@ -9,6 +10,7 @@ export interface ArticleProps {
   categoryId: number;
   createdAt: string;
   user: UserProps;
+  category: CategoryProps;
 }
 
 export interface NestedArticle {

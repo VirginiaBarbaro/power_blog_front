@@ -5,3 +5,8 @@ export interface Category {
   name: string;
   articles?: NestedArticle[];
 }
+
+export interface CategoryProps {
+  id: number;
+  name: string;
+}

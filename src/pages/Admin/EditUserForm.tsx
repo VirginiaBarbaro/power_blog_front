@@ -1,20 +1,16 @@
-import axios from "axios";
-import NavigationBar from "../components/NavigationBar";
-import { useState, FormEvent } from "react";
-import { RootState } from "../redux/store";
-import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import Sidebar from "../../components/Admin/Sidebar";
 import { ToastContainer, toast } from "react-toastify";
+import { useState, FormEvent } from "react";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
-function ProfileSettingsForm() {
+function EditUserForm() {
   const loggedUser = useSelector((state: RootState) => state.token);
 
   const { id } = useParams();
   const navigate = useNavigate();
-
-  const handleBack = () => {
-    navigate(-1);
-  };
 
   const [firstname, setFirstname] = useState<string>("");
   const [lastname, setLastname] = useState<string>("");
@@ -23,7 +19,7 @@ function ProfileSettingsForm() {
   const [avatar, setAvatar] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const handleEditProfile = async (e: FormEvent) => {
+  const handleEditData = async (e: FormEvent) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -48,7 +44,7 @@ function ProfileSettingsForm() {
 
     if (response) {
       toast.success("Profile updated successfully!", {
-        position: toast.POSITION.BOTTOM_RIGHT,
+        position: toast.POSITION.TOP_RIGHT,
       });
       setTimeout(() => {
         navigate(-1);
@@ -56,7 +52,7 @@ function ProfileSettingsForm() {
       }, 2000);
     } else {
       toast.error("Error updating profile!", {
-        position: toast.POSITION.BOTTOM_LEFT,
+        position: toast.POSITION.TOP_RIGHT,
       });
     }
   };
@@ -68,22 +64,26 @@ function ProfileSettingsForm() {
     }
   };
 
+  const prevPage = () => {
+    navigate(-1);
+  };
+
   return (
     <>
-      <NavigationBar />
+      <Sidebar />
       <div className="container mx-auto mt-28 ">
         <div className="flex">
           <div className="items-center inline">
             <i
               className="fa-solid fa-arrow-left text-3xl ml-2 hover:text-electric-blue active:scale-90"
-              onClick={handleBack}
+              onClick={prevPage}
             ></i>
           </div>
           <div className="mx-auto">
-            <h2 className="text-center text-4xl pb-12">Profile settings</h2>
+            <h2 className="text-center text-4xl pb-12">Edit user ID: {id}</h2>
           </div>
         </div>
-        <form className="px-4" onSubmit={(e) => handleEditProfile(e)}>
+        <form className="px-4" onSubmit={(e) => handleEditData(e)}>
           <div className="grid md:grid-cols-2 md:gap-6">
             <div className="relative z-0 w-full mb-6 group">
               <input
@@ -164,4 +164,4 @@ function ProfileSettingsForm() {
   );
 }
 
-export default ProfileSettingsForm;
+export default EditUserForm;

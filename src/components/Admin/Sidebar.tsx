@@ -1,33 +1,27 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
-// import { setToken } from "../../redux/slices/tokenSlice";
+import { setToken } from "../../redux/slices/tokenSlice";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-// import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Sidebar() {
   const loggedUser = useSelector((state: RootState) => state.token);
 
-  // const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  // const handleLogout = () => {
-  //   dispatch(setToken({ token: null, user: null }));
-  //   navigate("/home");
-  // };
-
-  // const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  // const handleToggle = () => {
-  //   setIsOpen(true);
-  // };
+  const handleLogout = () => {
+    dispatch(setToken({ token: null, user: null }));
+    navigate("/home");
+  };
 
   const [open, setOpen] = useState(false);
 
   return (
     <div className="shadow-md bg-white py-3 fixed z-20 top-0 left-0 right-0">
       <button
-        className="ml-4 bg-electric-blue text-light-grey p-2 rounded-full"
+        className="ml-14 bg-electric-blue text-light-grey p-2 rounded-full"
         onClick={() => setOpen(true)}
       >
         <svg
@@ -79,10 +73,10 @@ function Sidebar() {
             </svg>
           </button>
 
-          <div className="space-x-4 py-4">
+          <div className="space-x-4 py-2">
             <div className="flex justify-center mb-2">
               <img
-                className="w-28 h-28 rounded-full ml-2"
+                className="w-24 h-24 rounded-full ml-2"
                 src={
                   loggedUser.token
                     ? `${
@@ -93,7 +87,7 @@ function Sidebar() {
                 alt=""
               />
             </div>
-            <div className="text-center text-light-grey px-4 text-lg mb-2">
+            <div className="text-center text-light-grey px-4 text-lg">
               <p>
                 {loggedUser.firstname} {loggedUser.lastname}
               </p>
@@ -110,17 +104,27 @@ function Sidebar() {
               <i className="fa-solid fa-users mr-2"></i> Users
             </div>
           </Link>
-          <div className="ml-2 text-white text-xl hover:bg-light-grey hover:rounded-l-md hover:text-electric-blue cursor-pointer py-3 px-3 mb-2">
-            <i className="fa-solid fa-user-gear mr-2"></i> Admins
-          </div>
+          <Link to={"/admin/settings"}>
+            <div className="ml-2 text-white text-xl hover:bg-light-grey hover:rounded-l-md hover:text-electric-blue cursor-pointer py-3 px-3 mb-2">
+              <i className="fa-solid fa-user-gear mr-2"></i> Admins
+            </div>
+          </Link>
           <div className="ml-2 text-white text-xl hover:bg-light-grey  hover:rounded-l-md hover:text-electric-blue cursor-pointer py-3 px-3 mb-2">
             <i className="fa-regular  fa-newspaper mr-2"></i> Articles
           </div>
           <div className="ml-2 text-white text-xl hover:bg-light-grey hover:rounded-l-md hover:text-electric-blue cursor-pointer py-3 px-3 mb-2">
             <i className="fa-solid fa-list-ul mr-2"></i> Categories
           </div>
-          <div className="ml-2 text-white text-xl hover:bg-light-grey hover:rounded-l-md hover:text-electric-blue cursor-pointer py-3 px-3 mb-2">
-            <i className="fa-solid fa-blog mr-2"></i> Blog
+          <Link to={"/home"}>
+            <div className="ml-2 text-white text-xl hover:bg-light-grey hover:rounded-l-md hover:text-electric-blue cursor-pointer py-3 px-3 mb-2">
+              <i className="fa-solid fa-blog mr-2"></i> Blog
+            </div>
+          </Link>
+          <div
+            className="ml-2 text-white text-xl hover:bg-light-grey hover:rounded-l-md hover:text-electric-blue cursor-pointer py-3 px-3 mb-2"
+            onClick={handleLogout}
+          >
+            <i className="fa-solid fa-power-off mr-2"></i> Sign out
           </div>
         </div>
       </div>

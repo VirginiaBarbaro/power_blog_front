@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import Sidebar from "../../components/Admin/Sidebar";
+import Sidebar from "../components/Admin/Sidebar";
 import axios from "axios";
-import { UserProps } from "../../types/user";
-import { RootState } from "../../redux/store";
+import { UserProps } from "../types/user";
+import { RootState } from "../redux/store";
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import { Link } from "react-router-dom";
@@ -18,27 +18,27 @@ import {
   Button,
 } from "@chakra-ui/react";
 
-function Users() {
+function Admins() {
   const loggedUser = useSelector((state: RootState) => state.token);
   console.log(loggedUser);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const [users, setUsers] = useState<UserProps[]>([]);
-  const [deleteUserId, setDeleteUserId] = useState<string>("");
+  const [admins, setAdmins] = useState<UserProps[]>([]);
+  const [deleteAdminId, setDeleteAdminId] = useState<string>("");
 
-  const successDeleted = () => toast.success("User deleted!");
+  const successDeleted = () => toast.success("Admin deleted successfully!");
   const errorDeleted = () => toast.error("Error deleting user!");
 
-  const handleDeleteUser = async (deleteUserId: string) => {
+  const handleDeleteAdmin = async (deleteAdminId: string) => {
     const response = await axios({
       headers: {
         Authorization: `Bearer ${loggedUser.token}`,
       },
       method: "delete",
-      url: `${import.meta.env.VITE_APP_API_URL}/users/${deleteUserId}`,
+      url: `${import.meta.env.VITE_APP_API_URL}/admins/${deleteAdminId}`,
     });
-    setUsers(users.filter((user: UserProps) => user.id !== +deleteUserId));
+    setAdmins(admins.filter((admin: UserProps) => admin.id !== +deleteAdminId));
 
     if (response.data.message === "User deleted successfully") {
       return successDeleted();
@@ -48,33 +48,38 @@ function Users() {
   };
 
   useEffect(() => {
-    const getUsers = async () => {
+    const getAdmins = async () => {
       const response = await axios({
         method: "get",
         url: `${import.meta.env.VITE_APP_API_URL}/users`,
       });
 
-      const notAdmin = response.data.filter((user: UserProps) => !user.isAdmin);
+      const notUsers = response.data.filter(
+        (admin: UserProps) => !admin.isAdmin
+      );
 
-      const usersArticles = await Promise.all(
-        notAdmin.map(async (user: UserProps) => {
+      const adminsArticles = await Promise.all(
+        notUsers.map(async (admin: UserProps) => {
           const articleResponse = await axios({
             method: "get",
-            url: `${import.meta.env.VITE_APP_API_URL}/articles/user/${user.id}`,
+            url: `${import.meta.env.VITE_APP_API_URL}/articles/user/${
+              admin.id
+            }`,
           });
-          return { ...user, articlesCount: articleResponse.data.length };
+          return { ...admin, articlesCount: articleResponse.data.length };
         })
       );
-      setUsers(usersArticles);
+      console.log(adminsArticles);
+      setAdmins(adminsArticles);
     };
-    getUsers();
+    getAdmins();
   }, []);
 
-  return users ? (
+  return admins ? (
     <>
       <Sidebar />
       <div className="container mt-24 mx-auto mb-8">
-        <h2 className="my-10 text-center text-2xl">Users managment</h2>
+        <h2 className="my-10 text-center text-2xl">Admins managment</h2>
         <div className="flex align-top justify-between max-[639px]:flex-col max-[639px]:px-4 gap-4 mx-auto">
           <table className="text-sm text-left text-gray-500 w-full max-w-3xl max-[639px]:max-w-lg shadow-md">
             <thead className="text-xs text-gray-700 uppercase bg-light-grey">
@@ -92,14 +97,14 @@ function Users() {
               </tr>
             </thead>
             <tbody>
-              {users.map((user) => {
+              {admins.map((admin) => {
                 return (
                   <tr
-                    key={user.id}
+                    key={admin.id}
                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                   >
                     <td className="w-4 p-4">
-                      <p>{user.id}</p>
+                      <p>{admin.id}</p>
                     </td>
                     <th
                       scope="row"
@@ -109,21 +114,21 @@ function Users() {
                         className="w-10 h-10 rounded-full"
                         src={`${
                           import.meta.env.VITE_APP_API_URL
-                        }/${user.avatar.replace("public", "")}`}
-                        alt={user.firstname + user.lastname}
+                        }/${admin.avatar.replace("public", "")}`}
+                        alt={admin.firstname + admin.lastname}
                       />
                       <div className="pl-3">
                         <div className="text-base font-semibold">
-                          {user.firstname} {user.lastname}
+                          {admin.firstname} {admin.lastname}
                         </div>
                         <div className="font-normal text-gray-500">
-                          {user.email}
+                          {admin.email}
                         </div>
                       </div>
                     </th>
                     <td className="text-center">
                       <p className="text-dark-black text-lg">
-                        {user.articlesCount}
+                        {admin.articlesCount}
                       </p>
                     </td>
                     <td className="px-6 py-4">
@@ -131,10 +136,10 @@ function Users() {
                         className="fa-regular fa-trash-can text-lg hover:text-red-700 max-[639px]:ml-2"
                         onClick={() => {
                           onOpen();
-                          setDeleteUserId(user.id.toString());
+                          setDeleteAdminId(admin.id.toString());
                         }}
                       ></i>
-                      <Link to={`/admin/edit/user/${user.id}`}>
+                      <Link to={`/admin/edit/user/${admin.id}`}>
                         <i className="fa-regular fa-pen-to-square text-lg mx-2 hover:text-electric-blue"></i>
                       </Link>
                     </td>
@@ -147,7 +152,7 @@ function Users() {
                       <ModalOverlay />
                       <ModalContent>
                         <ModalHeader>
-                          Delete user ID: {deleteUserId}
+                          Delete admin ID: {deleteAdminId}
                         </ModalHeader>
                         <ModalCloseButton className="hover:text-red-600 hover:bg-transparent" />
                         <ModalBody>
@@ -157,7 +162,7 @@ function Users() {
                         <ModalFooter>
                           <Button
                             onClick={() => {
-                              handleDeleteUser(deleteUserId);
+                              handleDeleteAdmin(deleteAdminId);
                               onClose();
                             }}
                             className="btn-confirm-delete"
@@ -174,12 +179,12 @@ function Users() {
             </tbody>
           </table>
           <div className="mx-auto">
-            <Link to={"/admin/create/user"}>
+            <Link to={"/admin/create"}>
               <button
                 type="button"
                 className="text-electric-blue hover:text-white border border-electric-blue hover:bg-electric-blue focus:outline-none focus:ring-electric-blue font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 transition duration-300 ease"
               >
-                Create user
+                Create admin
               </button>
             </Link>
           </div>
@@ -187,8 +192,8 @@ function Users() {
       </div>
     </>
   ) : (
-    <p className="text-center">Loading ...</p>
+    <p className="text-center">Loading.. </p>
   );
 }
 
-export default Users;
+export default Admins;

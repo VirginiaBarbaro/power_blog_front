@@ -11,11 +11,9 @@ import ProfileSettingsForm from "./pages/ProfileSettingsForm";
 import DataAccessForm from "./pages/DataAccessForm";
 import ArticleByCategory from "./pages/ArticleByCategory";
 import Dashboard from "./pages/Admin/Dashboard";
-import Users from "./pages/Admin/Users";
+import Users from "./pages/Admin/AllUsers";
 import EditUserForm from "./pages/Admin/EditUserForm";
 import CreateUserForm from "./pages/Admin/CreateUserForm";
-import Admins from "./pages/Admins";
-import CreateAdminForm from "./pages/Admin/CreateAdminForm";
 
 function App() {
   return (
@@ -37,7 +35,6 @@ function App() {
         <Route path="/admin/users" element={<Users />} />
         <Route path="/admin/create/user" element={<CreateUserForm />} />
         <Route path="/admin/edit/user/:id" element={<EditUserForm />} />
-        <Route path="/admin/settings" element={<Admins />} />
         {/* 404 Page */}
         <Route path="*" element={<p>Erorr 404 page not found</p>} />
       </Routes>

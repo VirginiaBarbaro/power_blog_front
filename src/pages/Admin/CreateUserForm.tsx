@@ -14,13 +14,11 @@ function CreateUserForm() {
   const [password, setPassword] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [avatar, setAvatar] = useState<File | null>(null);
-  const [isAdmin, setIsAdmin] = useState<number>(0);
+  const [isAdmin, setIsAdmin] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleCreate = async (e: FormEvent) => {
     e.preventDefault();
-
-    // const isAdminString = String(isAdmin);
 
     const formData = new FormData();
     formData.append("firstname", firstname);
@@ -29,7 +27,7 @@ function CreateUserForm() {
     formData.append("email", email);
     formData.append("password", password);
     formData.append("bio", bio);
-    // formData.append("isAdmin", isAdminString);
+    formData.append(isAdmin, isAdmin);
 
     if (avatar !== null) {
       formData.append("avatar", avatar);
@@ -59,26 +57,12 @@ function CreateUserForm() {
     }
   };
 
-  const handleIsAdmin = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let userIsAdmin: number = 0;
-
-    const checked = e.target.checked;
-    userIsAdmin = checked ? 1 : 0;
-    setIsAdmin(userIsAdmin);
-  };
-
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       setAvatar(file);
     }
   };
-
-  // const handleIsAdmin = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const isAdmin = e.target.checked;
-  //   console.log(isAdmin);
-  //   setIsAdmin(isAdmin);
-  // };
 
   const prevPage = () => {
     navigate(-1);
@@ -199,19 +183,15 @@ function CreateUserForm() {
                 onChange={handleFileChange}
               />
             </div>
-            <div>
-              <label className="relative inline-flex items-center mb-4 cursor-pointer">
-                <input
-                  type="checkbox"
-                  value={isAdmin}
-                  onChange={handleIsAdmin}
-                  className="sr-only peer"
-                />
-                <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-                  Admin
-                </span>
-              </label>
+            <div className="relative z-0 w-full mb-6 group">
+              <select onChange={(e) => setIsAdmin(e.target.value)}>
+                <option>
+                  Yes
+                </option>
+                <option>
+                  No
+                </option>
+              </select>
             </div>
           </div>
           <div className="flex justify-center mt-10">

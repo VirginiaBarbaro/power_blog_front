@@ -18,7 +18,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 
-function Users() {
+function AllUsers() {
   const loggedUser = useSelector((state: RootState) => state.token);
   console.log(loggedUser);
 
@@ -54,10 +54,10 @@ function Users() {
         url: `${import.meta.env.VITE_APP_API_URL}/users`,
       });
 
-      const notAdmin = response.data.filter((user: UserProps) => !user.isAdmin);
+      // const notAdmin = response.data.filter((user: UserProps) => !user.isAdmin);
 
       const usersArticles = await Promise.all(
-        notAdmin.map(async (user: UserProps) => {
+        response.data.map(async (user: UserProps) => {
           const articleResponse = await axios({
             method: "get",
             url: `${import.meta.env.VITE_APP_API_URL}/articles/user/${user.id}`,
@@ -84,6 +84,9 @@ function Users() {
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Fullname
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Admin
                 </th>
                 <th className="ml-14 py-3">Articles posted</th>
                 <th scope="col" className="px-6 py-3">
@@ -121,6 +124,13 @@ function Users() {
                         </div>
                       </div>
                     </th>
+                    <td className="text-center">
+                      {user.isAdmin === true ? (
+                        <i className="fa-solid fa-check text-green-500"></i>
+                      ) : (
+                        <i className="fa-solid fa-xmark text-red-500"></i>
+                      )}
+                    </td>
                     <td className="text-center">
                       <p className="text-dark-black text-lg">
                         {user.articlesCount}
@@ -191,4 +201,4 @@ function Users() {
   );
 }
 
-export default Users;
+export default AllUsers;

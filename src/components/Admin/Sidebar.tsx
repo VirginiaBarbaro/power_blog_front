@@ -101,12 +101,7 @@ function Sidebar() {
           </Link>
           <Link to={"/admin/users"}>
             <div className="ml-2 text-white text-xl hover:bg-light-grey hover:rounded-l-md hover:text-electric-blue cursor-pointer py-3 px-3 mb-2">
-              <i className="fa-solid fa-users mr-2"></i> Users
-            </div>
-          </Link>
-          <Link to={"/admin/settings"}>
-            <div className="ml-2 text-white text-xl hover:bg-light-grey hover:rounded-l-md hover:text-electric-blue cursor-pointer py-3 px-3 mb-2">
-              <i className="fa-solid fa-user-gear mr-2"></i> Admins
+              <i className="fa-solid fa-users mr-2"></i>All users
             </div>
           </Link>
           <div className="ml-2 text-white text-xl hover:bg-light-grey  hover:rounded-l-md hover:text-electric-blue cursor-pointer py-3 px-3 mb-2">

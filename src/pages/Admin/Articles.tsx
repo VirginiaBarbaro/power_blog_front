@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import Sidebar from "../../components/Admin/Sidebar";
-import axios from "axios";
-import { UserProps } from "../../types/user";
-import { RootState } from "../../redux/store";
-import { useSelector } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import { ArticleProps } from "../../types/article";
+import axios from "axios";
 import {
   Modal,
   ModalOverlay,
@@ -18,61 +15,68 @@ import {
   Button,
 } from "@chakra-ui/react";
 
-function AllUsers() {
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
+import { ToastContainer, toast } from "react-toastify";
+
+function Article() {
+  const successDeleted = () => toast.success("Article deleted successfuly!");
+  const errorDeleted = () => toast.error("Error deleting article!");
+
   const loggedUser = useSelector((state: RootState) => state.token);
-  console.log(loggedUser);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const [users, setUsers] = useState<UserProps[]>([]);
-  const [deleteUserId, setDeleteUserId] = useState<string>("");
+  const [articles, setArticles] = useState<ArticleProps[]>([]);
+  const [deleteArticleId, setDeleteArticleId] = useState<string>("");
 
-  const successDeleted = () => toast.success("User deleted!");
-  const errorDeleted = () => toast.error("Error deleting user!");
+  useEffect(() => {
+    const getArticles = async () => {
+      const response = await axios({
+        method: "get",
+        url: `${import.meta.env.VITE_APP_API_URL}/articles`,
+      });
+      console.log(response.data);
+      setArticles(response.data);
+    };
+    getArticles();
+  }, []);
 
-  const handleDeleteUser = async (deleteUserId: string) => {
+  function truncateText(text: string, limit: number) {
+    const words = text.split(" ");
+    if (words.length > limit) {
+      return words.slice(0, limit).join(" ") + "...";
+    } else {
+      return text;
+    }
+  }
+
+  const handleDelteArticle = async (deleteArticleId: string) => {
     const response = await axios({
       headers: {
         Authorization: `Bearer ${loggedUser.token}`,
       },
       method: "delete",
-      url: `${import.meta.env.VITE_APP_API_URL}/users/${deleteUserId}`,
+      url: `${import.meta.env.VITE_APP_API_URL}/articles/${deleteArticleId}`,
     });
-    setUsers(users.filter((user: UserProps) => user.id !== +deleteUserId));
+    setArticles(
+      articles.filter(
+        (article: ArticleProps) => article.id !== +deleteArticleId
+      )
+    );
 
-    if (response.data.message === "User deleted successfully") {
+    if (response.data.message === "Article successfully deleted!") {
       return successDeleted();
     } else {
       return errorDeleted();
     }
   };
 
-  useEffect(() => {
-    const getUsers = async () => {
-      const response = await axios({
-        method: "get",
-        url: `${import.meta.env.VITE_APP_API_URL}/users`,
-      });
-
-      const usersArticles = await Promise.all(
-        response.data.map(async (user: UserProps) => {
-          const articleResponse = await axios({
-            method: "get",
-            url: `${import.meta.env.VITE_APP_API_URL}/articles/user/${user.id}`,
-          });
-          return { ...user, articlesCount: articleResponse.data.length };
-        })
-      );
-      setUsers(usersArticles);
-    };
-    getUsers();
-  }, []);
-
-  return users ? (
+  return articles ? (
     <>
       <Sidebar />
       <div className="container mt-24 mx-auto mb-8">
-        <h2 className="my-10 text-center text-2xl">Users managment</h2>
+        <h2 className="my-10 text-center text-2xl">Articles managment</h2>
         <div className="flex align-top justify-between max-[639px]:flex-col max-[639px]:px-4 gap-4 mx-auto">
           <table className="text-sm text-left text-gray-500 w-full max-w-3xl max-[639px]:max-w-lg shadow-md">
             <thead className="text-xs text-gray-700 uppercase bg-light-grey">
@@ -81,68 +85,72 @@ function AllUsers() {
                   ID
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Fullname
+                  Title
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Admin
+                  Headline
                 </th>
-                <th className="ml-14 py-3">Articles posted</th>
+                <th scope="col" className="px-6 py-3">
+                  Content
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Image
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Category
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Author
+                </th>
                 <th scope="col" className="px-6 py-3">
                   Action
                 </th>
               </tr>
             </thead>
             <tbody>
-              {users.map((user) => {
+              {articles.map((article) => {
                 return (
                   <tr
-                    key={user.id}
+                    key={article.id}
                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                   >
                     <td className="w-4 p-4">
-                      <p>{user.id}</p>
+                      <p>{article.id}</p>
                     </td>
-                    <th
-                      scope="row"
-                      className="flex items-center px-6 py-4 text-gray-900 dark:text-white"
-                    >
+                    <td className="w-4 p-4">
+                      <p>{article.title}</p>
+                    </td>
+                    <td className="w-4 p-4">
+                      <p>{article.headline}</p>
+                    </td>
+                    <td className="w-4 p-4">
+                      <p>{truncateText(article.content, 7)} </p>
+                    </td>
+                    <td className="text-center p-2">
                       <img
-                        className="w-10 h-10 rounded-full"
+                        className="h-14 w-18 m-auto"
                         src={`${
                           import.meta.env.VITE_APP_API_URL
-                        }/${user.avatar.replace("public", "")}`}
-                        alt={user.firstname + user.lastname}
+                        }/${article.image.replace("public", "")}`}
                       />
-                      <div className="pl-3">
-                        <div className="text-base font-semibold">
-                          {user.firstname} {user.lastname}
-                        </div>
-                        <div className="font-normal text-gray-500">
-                          {user.email}
-                        </div>
-                      </div>
-                    </th>
-                    <td className="text-center">
-                      {user.isAdmin === true ? (
-                        <i className="fa-solid fa-check text-green-500"></i>
-                      ) : (
-                        <i className="fa-solid fa-xmark text-red-500"></i>
-                      )}
                     </td>
-                    <td className="text-center">
-                      <p className="text-dark-black text-lg">
-                        {user.articlesCount}
+                    <td className="w-4 p-4">
+                      <p>{article.category.name} </p>
+                    </td>
+                    <td className="w-4 p-4">
+                      <p>
+                        {article.user.firstname} {article.user.lastname}
                       </p>
                     </td>
-                    <td className="px-6 py-4">
+                    <td className="text-center">
                       <i
                         className="fa-regular fa-trash-can text-lg hover:text-red-700 max-[639px]:ml-2"
                         onClick={() => {
                           onOpen();
-                          setDeleteUserId(user.id.toString());
+                          setDeleteArticleId(article.id.toString());
                         }}
                       ></i>
-                      <Link to={`/admin/edit/user/${user.id}`}>
+                      <Link to={`/admin/edit/article/${article.id}`}>
                         <i className="fa-regular fa-pen-to-square text-lg mx-2 hover:text-electric-blue"></i>
                       </Link>
                     </td>
@@ -155,7 +163,7 @@ function AllUsers() {
                       <ModalOverlay />
                       <ModalContent>
                         <ModalHeader>
-                          Delete user ID: {deleteUserId}
+                          Delete article ID: {deleteArticleId}
                         </ModalHeader>
                         <ModalCloseButton className="hover:text-red-600 hover:bg-transparent" />
                         <ModalBody>
@@ -165,7 +173,7 @@ function AllUsers() {
                         <ModalFooter>
                           <Button
                             onClick={() => {
-                              handleDeleteUser(deleteUserId);
+                              handleDelteArticle(deleteArticleId);
                               onClose();
                             }}
                             className="btn-confirm-delete"
@@ -175,19 +183,19 @@ function AllUsers() {
                         </ModalFooter>
                       </ModalContent>
                     </Modal>
-                    <ToastContainer className={"toastify--success"} />
                   </tr>
                 );
               })}
+              <ToastContainer className={"toastify--success"} />
             </tbody>
           </table>
           <div className="mx-auto">
-            <Link to={"/admin/create/user"}>
+            <Link to={"/admin/create/article"}>
               <button
                 type="button"
                 className="text-electric-blue hover:text-white border border-electric-blue hover:bg-electric-blue focus:outline-none focus:ring-electric-blue font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 transition duration-300 ease"
               >
-                Create user
+                Create article
               </button>
             </Link>
           </div>
@@ -195,8 +203,8 @@ function AllUsers() {
       </div>
     </>
   ) : (
-    <p className="text-center">Loading ...</p>
+    <p>Loading...</p>
   );
 }
 
-export default AllUsers;
+export default Article;

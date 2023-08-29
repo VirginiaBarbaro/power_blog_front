@@ -184,13 +184,13 @@ function CreateUserForm() {
               />
             </div>
             <div className="relative z-0 w-full mb-6 group">
-              <select onChange={(e) => setIsAdmin(e.target.value)}>
-                <option>
-                  Yes
-                </option>
-                <option>
-                  No
-                </option>
+              User is admin?
+              <select
+                onChange={(e) => setIsAdmin(e.target.value)}
+                className="ml-3"
+              >
+                <option value={"0"}>No</option>
+                <option value={"1"}>Yes</option>
               </select>
             </div>
           </div>

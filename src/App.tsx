@@ -14,6 +14,9 @@ import Dashboard from "./pages/Admin/Dashboard";
 import Users from "./pages/Admin/AllUsers";
 import EditUserForm from "./pages/Admin/EditUserForm";
 import CreateUserForm from "./pages/Admin/CreateUserForm";
+import Article from "./pages/Admin/Articles";
+import EditArticleForm from "./pages/Admin/EditArticleForm";
+import CreateArticleForm from "./pages/Admin/CreateArticleForm";
 
 function App() {
   return (
@@ -35,6 +38,9 @@ function App() {
         <Route path="/admin/users" element={<Users />} />
         <Route path="/admin/create/user" element={<CreateUserForm />} />
         <Route path="/admin/edit/user/:id" element={<EditUserForm />} />
+        <Route path="/admin/articles" element={<Article />} />
+        <Route path="admin/edit/article/:id" element={<EditArticleForm />} />
+        <Route path="/admin/create/article" element={<CreateArticleForm />} />
         {/* 404 Page */}
         <Route path="*" element={<p>Erorr 404 page not found</p>} />
       </Routes>

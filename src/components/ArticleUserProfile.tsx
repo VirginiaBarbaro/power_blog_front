@@ -3,7 +3,7 @@ import axios from "axios";
 import { Article, ArticleProps } from "../types/article";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
-
+import { toast } from "react-toastify";
 import {
   Modal,
   ModalOverlay,
@@ -25,6 +25,7 @@ import {
   DrawerCloseButton,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { Category } from "../types/category";
 
 interface ArticleUserProfileProps {
   userId: string;
@@ -49,11 +50,24 @@ function ArticleUserProfile({ userId }: ArticleUserProfileProps) {
 
   const [deleteArticleId, setDeleteArticleId] = useState<string>("");
   const [updateArticleId, setUpdateArticleId] = useState<string>("");
+  const [categories, setCategories] = useState<Category[]>([]);
 
   const [title, setTitle] = useState<string>("");
   const [headline, setHeadline] = useState<string>("");
   const [content, setContent] = useState<string>("");
+  const [categoryId, setCategoryId] = useState<number>();
   const [image, setImage] = useState<File | null>(null);
+
+  useEffect(() => {
+    const getCategories = async () => {
+      const response = await axios({
+        method: "get",
+        url: `${import.meta.env.VITE_APP_API_URL}/categories`,
+      });
+      setCategories(response.data);
+    };
+    getCategories();
+  }, []);
 
   useEffect(() => {
     const getUserArticles = async () => {
@@ -88,12 +102,16 @@ function ArticleUserProfile({ userId }: ArticleUserProfileProps) {
     formData.append("title", title);
     formData.append("headline", headline);
     formData.append("content", content);
+    formData.append(
+      "categoryId",
+      categoryId !== undefined ? categoryId.toString() : ""
+    );
 
     if (image !== null) {
       formData.append("image", image);
     }
 
-    await axios({
+    const response = await axios({
       headers: {
         Authorization: `Bearer ${loggedUser.token}`,
         "Content-Type": "multipart/form-data",
@@ -102,6 +120,20 @@ function ArticleUserProfile({ userId }: ArticleUserProfileProps) {
       url: `${import.meta.env.VITE_APP_API_URL}/articles/${updateArticleId}`,
       data: formData,
     });
+
+    if (response) {
+      toast.success("Article updated successfully!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      setTimeout(() => {
+        handleCloseDrawer();
+        window.location.reload();
+      }, 2000);
+    } else {
+      toast.error("Error updating article!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -224,14 +256,27 @@ function ArticleUserProfile({ userId }: ArticleUserProfileProps) {
                                 onChange={(e) => setContent(e.target.value)}
                                 required={true}
                               />
-                              <label
-                                // for="floating_standard"
-                                className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                              >
+                              <label className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                                 Content
                               </label>
                             </div>
-                            <div className="mt-20">
+                            <div className="relative z-0 w-full group mt-6">
+                              Category:
+                              <select
+                                onChange={(e) => setCategoryId(+e.target.value)}
+                                className="ml-3"
+                              >
+                                {categories.map((category) => {
+                                  <span key={category.id}></span>;
+                                  return (
+                                    <option value={category.id}>
+                                      {category.name}
+                                    </option>
+                                  );
+                                })}
+                              </select>
+                            </div>
+                            <div className="mt-10">
                               <input
                                 type="file"
                                 name="image"
@@ -241,10 +286,7 @@ function ArticleUserProfile({ userId }: ArticleUserProfileProps) {
                               />
                             </div>
                             <div className="flex justify-center mt-10">
-                              <button
-                                className="btn-modify-article"
-                                onClick={handleCloseDrawer}
-                              >
+                              <button className="btn-modify-article">
                                 Confirm
                               </button>
                             </div>

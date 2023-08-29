@@ -5,7 +5,7 @@ import { UserProps } from "../../../types/user";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 
-function CategoriesCard() {
+function DashboardCards() {
   const [users, setUsers] = useState<UserProps[]>([]);
   const [articles, setArticles] = useState<Article[]>([]);
   const [favourites, setFavourites] = useState<FavouriteArticle[]>([]);
@@ -114,4 +114,4 @@ function CategoriesCard() {
   );
 }
 
-export default CategoriesCard;
+export default DashboardCards;

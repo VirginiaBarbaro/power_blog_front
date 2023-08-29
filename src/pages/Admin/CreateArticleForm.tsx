@@ -1,0 +1,177 @@
+import { useNavigate } from "react-router-dom";
+import Sidebar from "../../components/Admin/Sidebar";
+import { ToastContainer, toast } from "react-toastify";
+import { useState, FormEvent, useEffect } from "react";
+import axios from "axios";
+import { Category } from "../../types/category";
+import { RootState } from "../../redux/store";
+import { useSelector } from "react-redux";
+
+function CreateArticleForm() {
+  const navigate = useNavigate();
+
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [title, setTitle] = useState<string>("");
+  const [headline, setHeadline] = useState<string>("");
+  const [content, setContent] = useState<string>("");
+  const [categoryId, setCategoryId] = useState<number>();
+  const [image, setImage] = useState<File | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const loggedUser = useSelector((state: RootState) => state.token);
+
+  useEffect(() => {
+    const getCategories = async () => {
+      const response = await axios({
+        method: "get",
+        url: `${import.meta.env.VITE_APP_API_URL}/categories`,
+      });
+      setCategories(response.data);
+    };
+    getCategories();
+  }, []);
+
+  const prevPage = () => {
+    navigate(-1);
+  };
+
+  const handleCreateArticle = async (e: FormEvent) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("headline", headline);
+    formData.append("content", content);
+    formData.append(
+      "categoryId",
+      categoryId !== undefined ? categoryId.toString() : ""
+    );
+
+    if (image !== null) {
+      formData.append("image", image);
+    }
+
+    const response = await axios({
+      headers: {
+        Authorization: `Bearer ${loggedUser.token}`,
+        "Content-Type": "multipart/form-data",
+      },
+      method: "post",
+      url: `${import.meta.env.VITE_APP_API_URL}/articles`,
+      data: formData,
+    });
+
+    if (response) {
+      toast.success("Article created successfully!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      setTimeout(() => {
+        navigate(-1);
+        setIsLoading(false);
+      }, 2000);
+    } else {
+      toast.error("Error updating article!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setImage(file);
+    }
+  };
+
+  return categories ? (
+    <>
+      <Sidebar />
+      <div className="container mx-auto mt-28 ">
+        <div className="flex">
+          <div className="items-center inline">
+            <i
+              className="fa-solid fa-arrow-left text-3xl ml-2 hover:text-electric-blue active:scale-90"
+              onClick={prevPage}
+            ></i>
+          </div>
+          <div className="mx-auto">
+            <h2 className="text-center text-4xl pb-12">Create new article</h2>
+          </div>
+        </div>
+        <form className="px-4" onSubmit={(e) => handleCreateArticle(e)}>
+          <div className="grid md:grid-cols-2 md:gap-6">
+            <div className="relative z-0 w-full mb-6 group">
+              <input
+                type="text"
+                name="title"
+                id="title"
+                className="block py-2.5 px-0 w-full text-md text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 focus:outline-none focus:ring-0 peer"
+                placeholder=" "
+                required
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+              <label className="peer-focus:font-medium absolute text-md text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                Title
+              </label>
+            </div>
+            <div className="relative z-0 w-full mb-6 group">
+              <input
+                type="text"
+                name="headline"
+                id="headline"
+                className="block py-2.5 px-0 w-full text-md text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                placeholder=" "
+                required
+                value={headline}
+                onChange={(e) => setHeadline(e.target.value)}
+              />
+              <label className="peer-focus:font-medium absolute text-md text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                Headline
+              </label>
+            </div>
+            <div className="relative z-0 w-full mb-6 group">
+              <input
+                type="text"
+                name="content"
+                id="content"
+                className="block py-2.5 px-0 w-full text-md text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-electric-blue focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                placeholder=" "
+                required
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+              />
+              <label className="peer-focus:font-medium absolute text-md text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                Content
+              </label>
+            </div>
+            <div className="relative z-0 w-full mb-6 group">
+              <select onChange={(e) => setCategoryId(+e.target.value)}>
+                {categories.map((category) => {
+                  <span key={category.id}></span>;
+                  return <option value={category.id}>{category.name}</option>;
+                })}
+              </select>
+            </div>
+            <div className="relative z-0 w-full mb-6 group">
+              <input
+                type="file"
+                name="avatar"
+                id="avatar"
+                onChange={handleFileChange}
+              />
+            </div>
+          </div>
+          <div className="flex justify-center mt-10">
+            <button className="btn-modify-article">Confirm</button>
+          </div>
+        </form>
+        <ToastContainer />
+      </div>
+    </>
+  ) : (
+    <p>Loading...</p>
+  );
+}
+
+export default CreateArticleForm;

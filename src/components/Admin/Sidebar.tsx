@@ -109,9 +109,11 @@ function Sidebar() {
               <i className="fa-regular  fa-newspaper mr-2"></i> Articles
             </div>
           </Link>
-          <div className="ml-2 text-white text-xl hover:bg-light-grey hover:rounded-l-md hover:text-electric-blue cursor-pointer py-3 px-3 mb-2">
-            <i className="fa-solid fa-list-ul mr-2"></i> Categories
-          </div>
+          <Link to={"/admin/categories"}>
+            <div className="ml-2 text-white text-xl hover:bg-light-grey hover:rounded-l-md hover:text-electric-blue cursor-pointer py-3 px-3 mb-2">
+              <i className="fa-solid fa-list-ul mr-2"></i> Categories
+            </div>
+          </Link>
           <Link to={"/home"}>
             <div className="ml-2 text-white text-xl hover:bg-light-grey hover:rounded-l-md hover:text-electric-blue cursor-pointer py-3 px-3 mb-2">
               <i className="fa-solid fa-blog mr-2"></i> Blog

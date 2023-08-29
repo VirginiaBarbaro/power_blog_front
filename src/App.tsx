@@ -17,6 +17,7 @@ import CreateUserForm from "./pages/Admin/CreateUserForm";
 import Article from "./pages/Admin/Articles";
 import EditArticleForm from "./pages/Admin/EditArticleForm";
 import CreateArticleForm from "./pages/Admin/CreateArticleForm";
+import Categories from "./pages/Admin/Categories";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
         <Route path="/admin/articles" element={<Article />} />
         <Route path="admin/edit/article/:id" element={<EditArticleForm />} />
         <Route path="/admin/create/article" element={<CreateArticleForm />} />
+        <Route path="/admin/categories" element={<Categories />} />
         {/* 404 Page */}
         <Route path="*" element={<p>Erorr 404 page not found</p>} />
       </Routes>

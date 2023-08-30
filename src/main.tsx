@@ -11,6 +11,8 @@ import "./style/landing.css";
 import "./style/navbar.css";
 import "./style/article.css";
 import "./style/admin/navStyle.css";
+import "./style/customLoader.css";
+import "./style/404.css";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>

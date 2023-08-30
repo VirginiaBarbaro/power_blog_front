@@ -3,6 +3,7 @@ import { ArticleProps } from "../../../types/article";
 import axios from "axios";
 import { formatDistanceToNow } from "date-fns";
 import { Link } from "react-router-dom";
+import CustomLoader from "../../utilities/CustomLoader";
 
 function RecentArticle() {
   const [articles, setArticles] = useState<ArticleProps[]>([]);
@@ -87,7 +88,7 @@ function RecentArticle() {
       </div>
     </div>
   ) : (
-    <p className="text-center">Loading...</p>
+    <CustomLoader />
   );
 }
 

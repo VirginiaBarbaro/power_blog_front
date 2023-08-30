@@ -5,6 +5,7 @@ import { RootState } from "../redux/store";
 import InfoUserProfile from "../components/InfoUserProfile";
 import ArticleUserProfile from "../components/ArticleUserProfile";
 import Footer from "../components/Footer";
+import CustomLoader from "../components/utilities/CustomLoader";
 
 function UserProfile() {
   const { id } = useParams();
@@ -27,7 +28,7 @@ function UserProfile() {
       <Footer />
     </>
   ) : (
-    <p>Loading...</p>
+    <CustomLoader />
   );
 }
 

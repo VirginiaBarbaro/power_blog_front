@@ -20,6 +20,7 @@ import CreateArticleForm from "./pages/Admin/CreateArticleForm";
 import Categories from "./pages/Admin/Categories";
 import ProtectedRoutes from "./pages/privateRoutes/ProtectedRoutes";
 import AdminProtectedRoutes from "./pages/privateRoutes/AdminProtectedRoutes";
+import Page404 from "./pages/Page404";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/category/:name" element={<ArticleByCategory />} />
         <Route path="/profile/:id" element={<UserProfile />} />
+
         {/* RUTAS PROTEGIDAS */}
         <Route element={<ProtectedRoutes redirectTo="/login" />}>
           <Route path="/favourite/article" element={<FavouriteArticle />} />
@@ -54,7 +56,7 @@ function App() {
           <Route path="/admin/categories" element={<Categories />} />
         </Route>
         {/* 404 Page */}
-        <Route path="*" element={<p>Erorr 404 page not found</p>} />
+        <Route path="*" element={<Page404 />} />
       </Routes>
     </>
   );

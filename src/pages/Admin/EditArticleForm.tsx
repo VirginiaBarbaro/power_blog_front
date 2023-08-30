@@ -6,6 +6,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { Category } from "../../types/category";
+import CustomLoader from "../../components/utilities/CustomLoader";
 
 function EditArticleForm() {
   const loggedUser = useSelector((state: RootState) => state.token);
@@ -173,7 +174,7 @@ function EditArticleForm() {
       </div>
     </>
   ) : (
-    <p>Loading...</p>
+    <CustomLoader />
   );
 }
 

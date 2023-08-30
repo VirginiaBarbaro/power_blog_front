@@ -128,8 +128,8 @@ function NavigationBar() {
           <div className="container max-w-screen-xl flex flex-wrap p-1 justify-between">
             <Link to={"/home"} className="flex mt-3">
               <img
-                src="/blog_logo.png"
-                className="h-10 w-28 object-cover"
+                src="/new_logo.webp.png"
+                className="h-10 w-40 ml-9 object-cover border"
                 alt="Power Blog Logo"
               />
             </Link>

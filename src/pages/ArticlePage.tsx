@@ -26,6 +26,7 @@ import {
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import Footer from "../components/Footer";
+import CustomLoader from "../components/utilities/CustomLoader";
 
 function ArticlePage() {
   const loggedUser = useSelector((state: RootState) => state.token);
@@ -348,7 +349,7 @@ function ArticlePage() {
       <Footer />
     </>
   ) : (
-    <p className="text-center">Loading...</p>
+    <CustomLoader />
   );
 }
 

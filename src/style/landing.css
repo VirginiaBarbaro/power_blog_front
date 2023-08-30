@@ -18,6 +18,13 @@
   background-color: #0000002a;
 }
 
+@media (min-width: 250px) and (max-width: 640.25px) {
+  .get-started {
+    margin-top: 9rem;
+    margin-left: 6rem;
+  }
+}
+
 .get-started:before {
   position: absolute;
   top: 2px;

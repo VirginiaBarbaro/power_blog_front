@@ -18,6 +18,7 @@ import {
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { ToastContainer, toast } from "react-toastify";
+import CustomLoader from "../../components/utilities/CustomLoader";
 
 function Article() {
   const successDeleted = () => toast.success("Article deleted successfuly!");
@@ -203,7 +204,7 @@ function Article() {
       </div>
     </>
   ) : (
-    <p>Loading...</p>
+    <CustomLoader />
   );
 }
 

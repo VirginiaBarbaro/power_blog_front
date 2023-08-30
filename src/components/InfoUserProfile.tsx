@@ -4,6 +4,7 @@ import { RootState } from "../redux/store";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { UserProps } from "../types/user";
+import CustomLoader from "./utilities/CustomLoader";
 
 function InfoUserProfile() {
   const loggedUser = useSelector((state: RootState) => state.token);
@@ -69,7 +70,7 @@ function InfoUserProfile() {
       </figure>
     </div>
   ) : (
-    <p className="text-center">Loading...</p>
+    <CustomLoader />
   );
 }
 

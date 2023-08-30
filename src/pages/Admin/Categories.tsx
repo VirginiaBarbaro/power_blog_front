@@ -16,6 +16,7 @@ import {
 import { RootState } from "../../redux/store";
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
+import CustomLoader from "../../components/utilities/CustomLoader";
 
 function Categories() {
   const loggedUser = useSelector((state: RootState) => state.token);
@@ -322,7 +323,7 @@ function Categories() {
       </div>
     </>
   ) : (
-    <p>Loading...</p>
+    <CustomLoader />
   );
 }
 

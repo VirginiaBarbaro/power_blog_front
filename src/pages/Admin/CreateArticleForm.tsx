@@ -6,6 +6,7 @@ import axios from "axios";
 import { Category } from "../../types/category";
 import { RootState } from "../../redux/store";
 import { useSelector } from "react-redux";
+import CustomLoader from "../../components/utilities/CustomLoader";
 
 function CreateArticleForm() {
   const navigate = useNavigate();
@@ -170,7 +171,7 @@ function CreateArticleForm() {
       </div>
     </>
   ) : (
-    <p>Loading...</p>
+    <CustomLoader />
   );
 }
 

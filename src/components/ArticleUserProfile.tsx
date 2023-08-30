@@ -26,6 +26,7 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { Category } from "../types/category";
+import CustomLoader from "./utilities/CustomLoader";
 
 interface ArticleUserProfileProps {
   userId: string;
@@ -354,7 +355,7 @@ function ArticleUserProfile({ userId }: ArticleUserProfileProps) {
       )}
     </div>
   ) : (
-    <p className="text-center">Loading...</p>
+    <CustomLoader />
   );
 }
 

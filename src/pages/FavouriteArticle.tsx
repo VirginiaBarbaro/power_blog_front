@@ -6,6 +6,7 @@ import axios from "axios";
 import { Article } from "../types/article";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
+import CustomLoader from "../components/utilities/CustomLoader";
 
 function FavouriteArticle() {
   const loggedUser = useSelector((state: RootState) => state.token);
@@ -91,7 +92,7 @@ function FavouriteArticle() {
       <Footer />
     </>
   ) : (
-    <p className="text-center">Loading...</p>
+    <CustomLoader />
   );
 }
 

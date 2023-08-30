@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { ArticleProps } from "../types/article";
 import { Link } from "react-router-dom";
+import CustomLoader from "./utilities/CustomLoader";
 
 function Article() {
   const [articles, setArticles] = useState<ArticleProps[]>([]);
@@ -64,7 +65,7 @@ function Article() {
       </div>
     </>
   ) : (
-    <p className="text-center">Loading...</p>
+    <CustomLoader />
   );
 }
 

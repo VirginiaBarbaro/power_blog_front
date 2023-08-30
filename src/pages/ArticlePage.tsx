@@ -1,7 +1,7 @@
 import { useEffect, useState, FormEvent } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-import { ArticleProps } from "../types/article";
+import { ArticleProps, FavouriteArticle } from "../types/article";
 import NavigationBar from "../components/NavigationBar";
 import { CommentProps } from "../types/comment";
 import { formatDistanceToNow } from "date-fns";
@@ -88,6 +88,27 @@ function ArticlePage() {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    const checkIfArticleIsFavourite = async () => {
+      try {
+        const response = await axios({
+          headers: {
+            Authorization: `Bearer ${loggedUser.token}`,
+          },
+          method: "get",
+          url: `${import.meta.env.VITE_APP_API_URL}/favourites`,
+        });
+        const isInFavourite = response.data.some(
+          (favourite: FavouriteArticle) => favourite.articleId === article?.id
+        );
+        setIsFavourite(isInFavourite);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    checkIfArticleIsFavourite();
+  }, [article?.id, loggedUser.token]);
 
   const handleCreateComment = async (e: FormEvent) => {
     e.preventDefault();
@@ -177,12 +198,14 @@ function ArticlePage() {
             </button>
           </div>
           <div>
-            <button onClick={onOpen}>
-              <i className="fa-solid fa-marker text-electric-blue"></i>
-              <span className="ml-2 text-dark-grey hover:text-dark-black hover:font-bold">
-                write comment
-              </span>
-            </button>
+            {loggedUser.token ? (
+              <button onClick={onOpen}>
+                <i className="fa-solid fa-marker text-electric-blue"></i>
+                <span className="ml-2 text-dark-grey hover:text-dark-black hover:font-bold">
+                  write comment
+                </span>
+              </button>
+            ) : null}
           </div>
 
           <Modal
@@ -224,16 +247,20 @@ function ArticlePage() {
           </Modal>
 
           <div className="ml-auto cursor-pointer">
-            <span className="mr-2 text-dark-grey hover:text-dark-black hover:font-bold">
-              {" "}
-              save
-            </span>
-            <i
-              className={`fa-${
-                isFavourite ? "solid" : "regular"
-              } fa-bookmark text-electric-blue`}
-              onClick={() => handleSaveArticleAsFavourite(article.id)}
-            ></i>
+            {loggedUser.token ? (
+              <>
+                <span className="mr-2 text-dark-grey hover:text-dark-black hover:font-bold">
+                  {" "}
+                  save
+                </span>
+                <i
+                  className={`fa-${
+                    isFavourite ? "solid" : "regular"
+                  } fa-bookmark text-electric-blue`}
+                  onClick={() => handleSaveArticleAsFavourite(article.id)}
+                ></i>
+              </>
+            ) : null}
           </div>
         </div>
 
@@ -262,7 +289,7 @@ function ArticlePage() {
                               className="w-10 h-10 rounded-full mr-1"
                               src={`${
                                 import.meta.env.VITE_APP_API_URL
-                              }/${comment.user.avatar.replace("public\\", "")}`}
+                              }/${comment.user.avatar.replace("public", "")}`}
                               alt="Neil image"
                             />
                           </div>

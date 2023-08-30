@@ -1,12 +1,14 @@
 import axios from "axios";
 import NavigationBar from "../components/NavigationBar";
 import { useState, FormEvent } from "react";
-// import { RootState } from "../redux/store";
-// import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 
 function DataAccessForm() {
+  const loggedUser = useSelector((state: RootState) => state.token);
+
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
@@ -18,9 +20,9 @@ function DataAccessForm() {
   const handleUpdateCredentials = async (e: FormEvent) => {
     e.preventDefault();
     const response = await axios({
-      /*   headers: {
-        Authorization: `Bearer ${loggedUser.token}`
-      } */
+      headers: {
+        Authorization: `Bearer ${loggedUser.token}`,
+      },
       method: "patch",
       url: `${import.meta.env.VITE_APP_API_URL}/users/credentials/${id}`,
       data: {

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { UserProps } from "../../../types/user";
 import { formatDistanceToNow } from "date-fns";
+import { Link } from "react-router-dom";
 
 function LatestUsers() {
   const [users, setUsers] = useState<UserProps[]>([]);
@@ -53,9 +54,11 @@ function LatestUsers() {
                     />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm text-dark-black truncate">
-                      {user.firstname} {user.lastname}
-                    </p>
+                    <Link to={`/profile/${user.id}`}>
+                      <p className="text-sm text-dark-black truncate hover:font-bold hover:cursor-pointer">
+                        {user.firstname} {user.lastname}
+                      </p>
+                    </Link>
                     <p className="text-sm text-dark-grey truncate">
                       {user.email}
                     </p>

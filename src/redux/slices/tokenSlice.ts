@@ -4,6 +4,14 @@ import { Token } from "../../types/tokenResponse";
 const initialState: Token = {
   token: null,
   user: null,
+  id: 0,
+  email: "",
+  firstname: "",
+  lastname: "",
+  username: "",
+  isAdmin: false,
+  avatar: "",
+  bio: "",
 };
 
 const tokenSlice = createSlice({

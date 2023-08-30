@@ -36,6 +36,7 @@ function NavigationBar() {
 
   const handleLogout = () => {
     dispatch(setToken({ token: null, user: null }));
+    navigate("/home");
   };
 
   useEffect(() => {
@@ -99,8 +100,10 @@ function NavigationBar() {
     });
     if (response.data.message === "Article successflly created") {
       articleCreated();
+      onClose();
       setTimeout(() => {
         navigate(`/profile/${loggedUser.id}`);
+        window.location.reload();
       }, 3000);
     }
   };
@@ -155,12 +158,14 @@ function NavigationBar() {
                         </Link>
                       ))}
                     </Dropdown>
-                    <li
-                      onClick={onOpen}
-                      className="element-navbar block md:bg-transparent py-2 pl-3 pr-4 md:p-0 cursor-pointer"
-                    >
-                      Post
-                    </li>
+                    {loggedUser.token ? (
+                      <li
+                        onClick={onOpen}
+                        className="element-navbar block md:bg-transparent py-2 pl-3 pr-4 md:p-0 cursor-pointer"
+                      >
+                        Post
+                      </li>
+                    ) : null}
                     <Modal
                       blockScrollOnMount={false}
                       isOpen={isOpen}

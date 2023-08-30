@@ -1,4 +1,5 @@
 export interface Token {
+  user: null | string;
   token: string | null;
   id: number;
   email: string;
@@ -8,4 +9,8 @@ export interface Token {
   isAdmin: boolean;
   avatar: string;
   bio: string;
+}
+
+export interface User {
+  token: string | null;
 }

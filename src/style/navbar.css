@@ -51,8 +51,8 @@
 
 /* Toast Message  */
 
-.Toastify__progress-bar--warning {
-  background-color: #0088cc;
+.Toastify__progress-bar {
+  background-color: transparent;
 }
 
 .Toastify__toast-icon svg {

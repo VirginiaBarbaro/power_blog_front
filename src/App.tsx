@@ -40,7 +40,7 @@ function App() {
         <Route path="/admin/create/user" element={<CreateUserForm />} />
         <Route path="/admin/edit/user/:id" element={<EditUserForm />} />
         <Route path="/admin/articles" element={<Article />} />
-        <Route path="admin/edit/article/:id" element={<EditArticleForm />} />
+        <Route path="/admin/edit/article/:id" element={<EditArticleForm />} />
         <Route path="/admin/create/article" element={<CreateArticleForm />} />
         <Route path="/admin/categories" element={<Categories />} />
         {/* 404 Page */}

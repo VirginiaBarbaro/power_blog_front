@@ -34,7 +34,6 @@ function Categories() {
   const [opened, setOpened] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
   const [updateCategoryId, setUpdateCategoryId] = useState<string>("");
-  const [categoryName, setCategoryName] = useState<string>("");
 
   const openEditModal = () => {
     setOpened(true);
@@ -46,10 +45,6 @@ function Categories() {
 
   const handleOpenModal = () => {
     setIsOpened(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsOpened(false);
   };
 
   useEffect(() => {
@@ -229,7 +224,6 @@ function Categories() {
                         </ModalFooter>
                       </ModalContent>
                     </Modal>
-                    {/* </Link> */}
                     <Modal
                       onClose={onClose}
                       isOpen={isOpen}

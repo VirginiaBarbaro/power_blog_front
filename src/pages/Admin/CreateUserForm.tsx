@@ -14,7 +14,7 @@ function CreateUserForm() {
   const [password, setPassword] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [avatar, setAvatar] = useState<File | null>(null);
-  const [isAdmin, setIsAdmin] = useState<string>("");
+  const [isAdmin, setIsAdmin] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleCreate = async (e: FormEvent) => {
@@ -27,11 +27,13 @@ function CreateUserForm() {
     formData.append("email", email);
     formData.append("password", password);
     formData.append("bio", bio);
-    formData.append(isAdmin, isAdmin);
 
     if (avatar !== null) {
       formData.append("avatar", avatar);
     }
+
+    const isAdminNumber = isAdmin ? 1 : 0;
+    formData.append("isAdmin", isAdminNumber.toString());
 
     const response = await axios({
       headers: {
@@ -186,11 +188,11 @@ function CreateUserForm() {
             <div className="relative z-0 w-full mb-6 group">
               User is admin?
               <select
-                onChange={(e) => setIsAdmin(e.target.value)}
+                onChange={(e) => setIsAdmin(Number(e.target.value))}
                 className="ml-3"
               >
-                <option value={"0"}>No</option>
-                <option value={"1"}>Yes</option>
+                <option value={0}>No</option>
+                <option value={1}>Yes</option>
               </select>
             </div>
           </div>

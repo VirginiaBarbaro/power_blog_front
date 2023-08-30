@@ -20,7 +20,6 @@ import {
 
 function AllUsers() {
   const loggedUser = useSelector((state: RootState) => state.token);
-  console.log(loggedUser);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 

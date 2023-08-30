@@ -46,8 +46,10 @@ function SignUp() {
     if (response.data.message === "Email already exist!") {
       return existingEmail();
     } else if (response.data.message === "User successfully created") {
-      navigate("/login");
       userCreated();
+      setTimeout(() => {
+        navigate("/login");
+      }, 3000);
     }
   };
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,5 +1,5 @@
 import { useEffect, useState, FormEvent } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { ArticleProps, FavouriteArticle } from "../types/article";
 import NavigationBar from "../components/NavigationBar";
@@ -73,6 +73,11 @@ function ArticlePage() {
     getComments();
   }, [id]);
 
+  const navigate = useNavigate();
+  const saved = () => toast.success("Article save as a favourite!");
+  const unsaved = () =>
+    toast.success("Article has been removed as a favourite!");
+
   const handleSaveArticleAsFavourite = async (id: number) => {
     try {
       const response = await axios({
@@ -84,6 +89,18 @@ function ArticlePage() {
       });
       console.log(response.data);
       setIsFavourite(!isFavourite);
+
+      if (response.data.message === "Article succesffully saved!") {
+        saved();
+        setTimeout(() => {
+          navigate("/favourite/article");
+        }, 3000);
+      } else if (
+        response.data.message ===
+        "The article has already been cancelled as a favorite"
+      ) {
+        return unsaved();
+      }
     } catch (error) {
       console.log(error);
     }

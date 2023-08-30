@@ -342,6 +342,16 @@ function ArticleUserProfile({ userId }: ArticleUserProfileProps) {
           </div>
         );
       })}
+      {userArticles.length === 0 && (
+        <div className="no-favourite-article mx-8 rounded">
+          <h2 className="no-favourite-article-title text-center">
+            You haven't published any article yet!
+          </h2>
+          <h2 className="no-favourite-article-message text-center">
+            Start writing articles now!
+          </h2>
+        </div>
+      )}
     </div>
   ) : (
     <p className="text-center">Loading...</p>

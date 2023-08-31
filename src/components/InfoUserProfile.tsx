@@ -44,7 +44,7 @@ function InfoUserProfile() {
                   )}`
                 : `${import.meta.env.VITE_APP_API_URL}/${
                     import.meta.env.VITE_APP_IMG_URL
-                  }/${user.avatar}`
+                  }${user.avatar}`
             }
             alt="profile picture"
           />

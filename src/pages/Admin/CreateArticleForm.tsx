@@ -17,7 +17,6 @@ function CreateArticleForm() {
   const [content, setContent] = useState<string>("");
   const [categoryId, setCategoryId] = useState<number>();
   const [image, setImage] = useState<File | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const loggedUser = useSelector((state: RootState) => state.token);
 
@@ -68,7 +67,6 @@ function CreateArticleForm() {
       });
       setTimeout(() => {
         navigate(-1);
-        setIsLoading(false);
       }, 2000);
     } else {
       toast.error("Error updating article!", {

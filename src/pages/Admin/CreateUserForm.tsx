@@ -15,7 +15,6 @@ function CreateUserForm() {
   const [email, setEmail] = useState<string>("");
   const [avatar, setAvatar] = useState<File | null>(null);
   const [isAdmin, setIsAdmin] = useState<number>(0);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleCreate = async (e: FormEvent) => {
     e.preventDefault();
@@ -50,7 +49,6 @@ function CreateUserForm() {
       });
       setTimeout(() => {
         navigate(-1);
-        setIsLoading(false);
       }, 2000);
     } else {
       toast.error("Error creating user!", {

@@ -17,7 +17,6 @@ function EditUserForm() {
   const [username, setUsername] = useState<string>("");
   const [bio, setBio] = useState<string>("");
   const [avatar, setAvatar] = useState<File | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleEditData = async (e: FormEvent) => {
     e.preventDefault();
@@ -48,7 +47,6 @@ function EditUserForm() {
       });
       setTimeout(() => {
         navigate(-1);
-        setIsLoading(false);
       }, 2000);
     } else {
       toast.error("Error updating profile!", {

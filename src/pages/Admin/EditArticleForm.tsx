@@ -20,7 +20,6 @@ function EditArticleForm() {
   const [content, setContent] = useState<string>("");
   const [image, setImage] = useState<File | null>(null);
   const [categoryId, setCategoryId] = useState<number>();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const getCategories = async () => {
@@ -65,7 +64,6 @@ function EditArticleForm() {
       });
       setTimeout(() => {
         navigate(-1);
-        setIsLoading(false);
       }, 2000);
     } else {
       toast.error("Error updating article!", {

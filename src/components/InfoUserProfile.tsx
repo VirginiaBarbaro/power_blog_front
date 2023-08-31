@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { UserProps } from "../types/user";
 import CustomLoader from "./utilities/CustomLoader";
+// import { Avatar } from "flowbite-react";
 
 function InfoUserProfile() {
   const loggedUser = useSelector((state: RootState) => state.token);
@@ -31,10 +32,20 @@ function InfoUserProfile() {
         <figcaption className="flex justify-center space-x-3">
           <img
             className="rounded-full w-16 h-16 "
-            src={`${import.meta.env.VITE_APP_API_URL}/${user.avatar.replace(
+            /* src={`${import.meta.env.VITE_APP_API_URL}/${user.avatar.replace(
               "public",
               ""
-            )}`}
+            )}`} */
+            src={
+              typeof user.avatar === "string"
+                ? `${import.meta.env.VITE_APP_API_URL}/${user.avatar.replace(
+                    "public",
+                    ""
+                  )}`
+                : `${import.meta.env.VITE_APP_API_URL}/${
+                    import.meta.env.VITE_APP_IMG_URL
+                  }/${user.avatar}`
+            }
             alt="profile picture"
           />
           <div className="font-medium dark:text-white text-left">

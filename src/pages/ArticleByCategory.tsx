@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import NavigationBar from "../components/NavigationBar";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
+import CustomLoader from "../components/utilities/CustomLoader";
 
 function ArticleByCategory() {
   const [categories, setCategories] = useState<Category>();
@@ -76,7 +77,7 @@ function ArticleByCategory() {
       <Footer />
     </>
   ) : (
-    <p className="text-center">Loading ...</p>
+    <CustomLoader />
   );
 }
 

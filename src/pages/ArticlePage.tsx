@@ -312,9 +312,15 @@ function ArticlePage() {
                           <div className="flex-shrink-0">
                             <img
                               className="w-10 h-10 rounded-full mr-1"
-                              src={`${
-                                import.meta.env.VITE_APP_API_URL
-                              }/${comment.user.avatar.replace("public", "")}`}
+                              src={
+                                typeof comment.user.avatar === "object"
+                                  ? `${import.meta.env.VITE_APP_IMG_URL}${
+                                      comment.user.avatar[0]
+                                    }`
+                                  : `${import.meta.env.VITE_APP_IMG_URL}${
+                                      comment.user.avatar
+                                    }`
+                              }
                               alt="Neil image"
                             />
                           </div>

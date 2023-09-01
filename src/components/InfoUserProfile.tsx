@@ -32,11 +32,11 @@ function InfoUserProfile() {
         <figcaption className="flex justify-center space-x-3">
           <img
             className="rounded-full w-16 h-16 "
-            /* src={`${import.meta.env.VITE_APP_API_URL}/${user.avatar.replace(
-              "public",
-              ""
-            )}`} */
-            src={`${import.meta.env.VITE_APP_IMG_URL}/${user.avatar[0]}`}
+            src={
+              typeof user.avatar === "object"
+                ? `${import.meta.env.VITE_APP_IMG_URL}${user.avatar[0]}`
+                : `${import.meta.env.VITE_APP_IMG_URL}${user.avatar}`
+            }
             alt="profile picture"
           />
           <div className="font-medium dark:text-white text-left">

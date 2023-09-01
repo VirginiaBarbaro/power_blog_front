@@ -271,10 +271,10 @@ function NavigationBar() {
                     alt="User avatar"
                     img={
                       loggedUser.token
-                        ? `${
-                            import.meta.env.VITE_APP_API_URL
-                          }${loggedUser.avatar.replace("public", "")}`
-                        : "/no_login.png"
+                        ? `${import.meta.env.VITE_APP_IMG_URL}${
+                            loggedUser.avatar
+                          }`
+                        : `${import.meta.env.VITE_APP_IMG_URL}/no_login.png`
                     }
                     rounded
                   />

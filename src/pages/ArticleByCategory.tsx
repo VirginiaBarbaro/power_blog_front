@@ -46,9 +46,11 @@ function ArticleByCategory() {
             >
               <img
                 className="rounded-t-lg article-image"
-                src={`${
-                  import.meta.env.VITE_APP_API_URL
-                }/${article.image.replace("public\\", "")}`}
+                src={
+                  typeof article.image === "object"
+                    ? `${import.meta.env.VITE_APP_IMG_URL}${article.image[0]}`
+                    : `${import.meta.env.VITE_APP_IMG_URL}${article.image}`
+                }
                 alt=""
               />
               <div className="p-4 mb-6">

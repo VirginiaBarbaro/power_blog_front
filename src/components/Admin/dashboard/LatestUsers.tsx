@@ -47,9 +47,13 @@ function LatestUsers() {
                   <div className="flex-shrink-0">
                     <img
                       className="w-12 h-12 rounded-full"
-                      src={`${
-                        import.meta.env.VITE_APP_API_URL
-                      }/${user.avatar.replace("public", "")}`}
+                      src={
+                        typeof user.avatar === "object"
+                          ? `${import.meta.env.VITE_APP_IMG_URL}${
+                              user.avatar[0]
+                            }`
+                          : `${import.meta.env.VITE_APP_IMG_URL}${user.avatar}`
+                      }
                       alt={user.firstname + user.lastname}
                     />
                   </div>

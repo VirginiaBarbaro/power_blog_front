@@ -53,9 +53,15 @@ function FavouriteArticle() {
               >
                 <img
                   className="rounded-t-lg article-image"
-                  src={`${
-                    import.meta.env.VITE_APP_API_URL
-                  }/${favourite.article.image.replace("public", "")}`}
+                  src={
+                    typeof favourite.article.image === "object"
+                      ? `${import.meta.env.VITE_APP_IMG_URL}${
+                          favourite.article.image[0]
+                        }`
+                      : `${import.meta.env.VITE_APP_IMG_URL}${
+                          favourite.article.image
+                        }`
+                  }
                   alt=""
                 />
                 <div className="p-4 mb-5">

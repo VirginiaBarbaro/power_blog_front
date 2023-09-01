@@ -171,9 +171,15 @@ function ArticlePage() {
               <div className="flex-shrink-0">
                 <img
                   className="w-12 h-12 rounded-full mr-5"
-                  src={`${
-                    import.meta.env.VITE_APP_API_URL
-                  }/${article.user.avatar.replace("public", "")}`}
+                  src={
+                    typeof article.image === "object"
+                      ? `${import.meta.env.VITE_APP_IMG_URL}${
+                          article.user.avatar[0]
+                        }`
+                      : `${import.meta.env.VITE_APP_IMG_URL}${
+                          article.user.avatar
+                        }`
+                  }
                   alt="Neil image"
                 />
               </div>
@@ -197,10 +203,11 @@ function ArticlePage() {
           </Link>
         </ul>
         <img
-          src={`${import.meta.env.VITE_APP_API_URL}/${article.image.replace(
-            "public",
-            ""
-          )}`}
+          src={
+            typeof article.image === "object"
+              ? `${import.meta.env.VITE_APP_IMG_URL}${article.image[0]}`
+              : `${import.meta.env.VITE_APP_IMG_URL}${article.image}`
+          }
           className="w-full h-auto max-w-4xl rounded-lg mt-10"
           alt="image description"
         />

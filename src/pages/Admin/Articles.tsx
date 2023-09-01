@@ -130,9 +130,15 @@ function Article() {
                     <td className="text-center p-2">
                       <img
                         className="h-14 w-18 m-auto"
-                        src={`${
-                          import.meta.env.VITE_APP_API_URL
-                        }/${article.image.replace("public", "")}`}
+                        src={
+                          typeof article.image === "object"
+                            ? `${import.meta.env.VITE_APP_IMG_URL}${
+                                article.image[0]
+                              }`
+                            : `${import.meta.env.VITE_APP_IMG_URL}${
+                                article.image
+                              }`
+                        }
                       />
                     </td>
                     <td className="w-4 p-4">

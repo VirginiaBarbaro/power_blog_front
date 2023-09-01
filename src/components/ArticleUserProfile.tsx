@@ -172,9 +172,13 @@ function ArticleUserProfile({ userId }: ArticleUserProfileProps) {
                 <Link to={`/article/${article.id}`}>
                   <img
                     className="h-48 w-full object-cover md:h-48 md:w-48"
-                    src={`${
-                      import.meta.env.VITE_APP_API_URL
-                    }/${article.image.replace("public", "")}`}
+                    src={
+                      typeof article.image === "object"
+                        ? `${import.meta.env.VITE_APP_IMG_URL}${
+                            article.image[0]
+                          }`
+                        : `${import.meta.env.VITE_APP_IMG_URL}${article.image}`
+                    }
                     alt="Modern building architecture"
                   />
                 </Link>

@@ -57,9 +57,15 @@ function RecentArticle() {
                     <div className="flex-shrink-0">
                       <img
                         className="w-16 h-12 rounded-md"
-                        src={`${
-                          import.meta.env.VITE_APP_API_URL
-                        }/${article.image.replace("public", "")}`}
+                        src={
+                          typeof article.image === "object"
+                            ? `${import.meta.env.VITE_APP_IMG_URL}${
+                                article.image[0]
+                              }`
+                            : `${import.meta.env.VITE_APP_IMG_URL}${
+                                article.image
+                              }`
+                        }
                         alt={article.headline}
                       />
                     </div>

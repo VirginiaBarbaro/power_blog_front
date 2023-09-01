@@ -107,9 +107,15 @@ function AllUsers() {
                     >
                       <img
                         className="w-10 h-10 rounded-full"
-                        src={`${
-                          import.meta.env.VITE_APP_API_URL
-                        }/${user.avatar.replace("public", "")}`}
+                        src={
+                          typeof user.avatar === "object"
+                            ? `${import.meta.env.VITE_APP_IMG_URL}${
+                                user.avatar[0]
+                              }`
+                            : `${import.meta.env.VITE_APP_IMG_URL}${
+                                user.avatar
+                              }`
+                        }
                         alt={user.firstname + user.lastname}
                       />
                       <div className="pl-3">

@@ -36,9 +36,7 @@ function InfoUserProfile() {
               "public",
               ""
             )}`} */
-            src={`${import.meta.env.VITE_APP_API_URL}/${
-              import.meta.env.VITE_APP_IMG_URL
-            }${user.avatar}`}
+            src={`${import.meta.env.VITE_APP_IMG_URL}${user.avatar}`}
             alt="profile picture"
           />
           <div className="font-medium dark:text-white text-left">

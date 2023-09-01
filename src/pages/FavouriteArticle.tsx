@@ -22,7 +22,6 @@ function FavouriteArticle() {
         method: "get",
         url: `${import.meta.env.VITE_APP_API_URL}/favourites`,
       });
-      console.log(response.data);
       setFavouritesArticles(response.data);
     };
     getFavouritesArticles();

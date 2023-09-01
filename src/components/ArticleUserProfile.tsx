@@ -76,7 +76,6 @@ function ArticleUserProfile({ userId }: ArticleUserProfileProps) {
         method: "get",
         url: `${import.meta.env.VITE_APP_API_URL}/articles/user/${userId}`,
       });
-      console.log(response.data);
       const sortedArticles = response.data.sort((a: Article, b: Article) => {
         const dateA = new Date(a.createdAt);
         const dateB = new Date(b.createdAt);

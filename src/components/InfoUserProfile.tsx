@@ -20,7 +20,6 @@ function InfoUserProfile() {
         method: "get",
         url: `${import.meta.env.VITE_APP_API_URL}/users/${id}`,
       });
-      console.log(response.data);
       setUser(response.data);
     };
     getUserInfo();

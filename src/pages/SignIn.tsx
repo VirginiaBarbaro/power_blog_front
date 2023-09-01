@@ -40,7 +40,6 @@ function SignIn() {
         dispatch(setToken(response.data));
         navigate("/home");
       }
-      console.log(response);
     } catch (error) {
       console.log(error);
     }

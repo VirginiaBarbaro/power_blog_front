@@ -22,7 +22,6 @@ function RecentArticle() {
         }
       );
       const lastFiveArticles = sortedArticles.slice(0, 5);
-      console.log(lastFiveArticles);
       setArticles(lastFiveArticles);
     };
     getArticles();

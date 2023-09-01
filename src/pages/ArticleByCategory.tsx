@@ -17,7 +17,6 @@ function ArticleByCategory() {
         method: "get",
         url: `${import.meta.env.VITE_APP_API_URL}/categories/${name}`,
       });
-      console.log(response.data);
       setCategories(response.data);
     };
     getArticlesByCategory();

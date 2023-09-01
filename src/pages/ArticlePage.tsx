@@ -54,7 +54,6 @@ function ArticlePage() {
         method: "get",
         url: `${import.meta.env.VITE_APP_API_URL}/articles/${id}`,
       });
-      console.log(response.data);
       setArticle(response.data);
     };
     getArticleInfo();
@@ -88,7 +87,6 @@ function ArticlePage() {
         method: "post",
         url: `${import.meta.env.VITE_APP_API_URL}/favourites/${id}`,
       });
-      console.log(response.data);
       setIsFavourite(!isFavourite);
 
       if (response.data.message === "Article succesffully saved!") {

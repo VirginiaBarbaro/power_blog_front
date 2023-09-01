@@ -13,7 +13,6 @@ function Article() {
         method: "get",
         url: `${import.meta.env.VITE_APP_API_URL}/articles`,
       });
-      console.log(response.data);
       setArticles(response.data);
     };
     getArticles();

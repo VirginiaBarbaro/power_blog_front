@@ -40,8 +40,8 @@ function Article() {
               className="rounded-t-lg article-image"
               src={
                 typeof article.image === "object"
-                  ? `${import.meta.env.VITE_APP_IMAGE_URL}/${article.image[0]}`
-                  : `${import.meta.env.REACT_APP_IMAGES_URL}/${article.image}`
+                  ? `${import.meta.env.VITE_APP_IMG_URL}/${article.image[0]}`
+                  : `${import.meta.env.VITE_APP_IMG_URL}/${article.image}`
               }
               alt=""
             />

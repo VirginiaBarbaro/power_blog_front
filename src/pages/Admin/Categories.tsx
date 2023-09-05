@@ -1,7 +1,6 @@
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import Sidebar from "../../components/Admin/Sidebar";
 import axios from "axios";
-import { Category } from "../../types/category";
 import {
   Modal,
   ModalOverlay,
@@ -17,8 +16,10 @@ import { RootState } from "../../redux/store";
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import CustomLoader from "../../components/utilities/CustomLoader";
+import useCategories from "../../hooks/useCategories";
 
 function Categories() {
+  const categories = useCategories();
   const loggedUser = useSelector((state: RootState) => state.token);
 
   const successCreated = () => toast.success("Category created!");
@@ -29,7 +30,6 @@ function Categories() {
   const errorEdited = () => toast.error("Error editing category!");
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [categories, setCategories] = useState<Category[]>([]);
   const [deleteCategoryId, setDeleteCategoryId] = useState<string>("");
   const [isOpened, setIsOpened] = useState<boolean>(false);
   const [opened, setOpened] = useState<boolean>(false);
@@ -48,17 +48,6 @@ function Categories() {
     setIsOpened(true);
   };
 
-  useEffect(() => {
-    const getCategories = async () => {
-      const response = await axios({
-        method: "get",
-        url: `${import.meta.env.VITE_APP_API_URL}/categories`,
-      });
-      setCategories(response.data);
-    };
-    getCategories();
-  }, []);
-
   const handleDeleteCategory = async (deleteCategoryId: string) => {
     const response = await axios({
       headers: {
@@ -67,14 +56,12 @@ function Categories() {
       method: "delete",
       url: `${import.meta.env.VITE_APP_API_URL}/categories/${deleteCategoryId}`,
     });
-    setCategories(
-      categories.filter(
-        (category: Category) => category.id !== +deleteCategoryId
-      )
-    );
 
     if (response.data.message === "Category successfully deleted!") {
-      return successDeleted();
+      successDeleted();
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
     } else {
       return errorDeleted();
     }

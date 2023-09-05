@@ -7,6 +7,7 @@ import { Article } from "../types/article";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 import CustomLoader from "../components/utilities/CustomLoader";
+import truncateText from "../components/utilities/truncateText";
 
 function FavouriteArticle() {
   const loggedUser = useSelector((state: RootState) => state.token);
@@ -26,15 +27,6 @@ function FavouriteArticle() {
     };
     getFavouritesArticles();
   }, []);
-
-  function truncateText(text: string, limit: number) {
-    const words = text.split(" ");
-    if (words.length > limit) {
-      return words.slice(0, limit).join(" ") + "...";
-    } else {
-      return text;
-    }
-  }
 
   return favouritesArticles ? (
     <>

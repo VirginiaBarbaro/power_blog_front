@@ -14,7 +14,7 @@ import {
   useDisclosure,
   Button,
 } from "@chakra-ui/react";
-
+import truncateText from "../../components/utilities/truncateText";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { ToastContainer, toast } from "react-toastify";
@@ -41,15 +41,6 @@ function Article() {
     };
     getArticles();
   }, []);
-
-  function truncateText(text: string, limit: number) {
-    const words = text.split(" ");
-    if (words.length > limit) {
-      return words.slice(0, limit).join(" ") + "...";
-    } else {
-      return text;
-    }
-  }
 
   const handleDelteArticle = async (deleteArticleId: string) => {
     const response = await axios({

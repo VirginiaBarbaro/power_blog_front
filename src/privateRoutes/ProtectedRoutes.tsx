@@ -1,8 +1,8 @@
 import { Navigate, Outlet } from "react-router";
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
-import { User } from "../../types/tokenResponse";
-import { UserProtectedRoutesProps } from "../../types/protectedRoutes";
+import { RootState } from "../redux/store";
+import { User } from "../types/tokenResponse";
+import { UserProtectedRoutesProps } from "../types/protectedRoutes";
 
 function ProtectedRoutes({
   redirectTo = "/login",

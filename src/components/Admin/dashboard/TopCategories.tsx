@@ -1,21 +1,8 @@
-import { useEffect, useState } from "react";
-import { Category } from "../../../types/category";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import useCategories from "../../../hooks/useCategories";
 
 function TopCategories() {
-  const [categories, setCategories] = useState<Category[]>([]);
-
-  useEffect(() => {
-    const getCategories = async () => {
-      const response = await axios({
-        method: "get",
-        url: `${import.meta.env.VITE_APP_API_URL}/categories`,
-      });
-      setCategories(response.data);
-    };
-    getCategories();
-  }, []);
+  const categories = useCategories();
 
   return categories ? (
     <div className="w-96 p-4 bg-white rounded-lg shadow sm:p-8 mx-auto">

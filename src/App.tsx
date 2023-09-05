@@ -18,8 +18,8 @@ import Article from "./pages/Admin/Articles";
 import EditArticleForm from "./pages/Admin/EditArticleForm";
 import CreateArticleForm from "./pages/Admin/CreateArticleForm";
 import Categories from "./pages/Admin/Categories";
-import ProtectedRoutes from "./components/privateRoutes/ProtectedRoutes";
-import AdminProtectedRoutes from "./components/privateRoutes/AdminProtectedRoutes";
+import ProtectedRoutes from "./privateRoutes/ProtectedRoutes";
+import AdminProtectedRoutes from "./privateRoutes/AdminProtectedRoutes";
 import Page404 from "./pages/Page404";
 
 function App() {

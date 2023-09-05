@@ -1,36 +1,25 @@
 import { useNavigate, useParams } from "react-router-dom";
 import Sidebar from "../../components/Admin/Sidebar";
 import { ToastContainer, toast } from "react-toastify";
-import { useState, FormEvent, useEffect } from "react";
+import { useState, FormEvent } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
-import { Category } from "../../types/category";
 import CustomLoader from "../../components/utilities/CustomLoader";
+import useCategories from "../../hooks/useCategories";
 
 function EditArticleForm() {
+  const categories = useCategories();
   const loggedUser = useSelector((state: RootState) => state.token);
 
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [categories, setCategories] = useState<Category[]>([]);
   const [title, setTitle] = useState<string>("");
   const [headline, setHeadline] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [image, setImage] = useState<File | null>(null);
   const [categoryId, setCategoryId] = useState<number>();
-
-  useEffect(() => {
-    const getCategories = async () => {
-      const response = await axios({
-        method: "get",
-        url: `${import.meta.env.VITE_APP_API_URL}/categories`,
-      });
-      setCategories(response.data);
-    };
-    getCategories();
-  }, []);
 
   const handleEditArticle = async (e: FormEvent) => {
     e.preventDefault();

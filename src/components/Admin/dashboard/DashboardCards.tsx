@@ -1,15 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Article, FavouriteArticle } from "../../../types/article";
+import { FavouriteArticle } from "../../../types/article";
 import { UserProps } from "../../../types/user";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
+import useArticles from "../../../hooks/useArticles";
 
 function DashboardCards() {
   const [users, setUsers] = useState<UserProps[]>([]);
-  const [articles, setArticles] = useState<Article[]>([]);
   const [favourites, setFavourites] = useState<FavouriteArticle[]>([]);
-
+  const articles = useArticles();
   const loggedUser = useSelector((state: RootState) => state.token);
 
   useEffect(() => {
@@ -24,17 +24,6 @@ function DashboardCards() {
   }, []);
 
   useEffect(() => {
-    const getArticles = async () => {
-      const response = await axios({
-        method: "get",
-        url: `${import.meta.env.VITE_APP_API_URL}/articles`,
-      });
-      setArticles(response.data);
-    };
-    getArticles();
-  }, []);
-
-  useEffect(() => {
     const getFavouritesArticles = async () => {
       const response = await axios({
         headers: {
@@ -46,17 +35,6 @@ function DashboardCards() {
       setFavourites(response.data);
     };
     getFavouritesArticles();
-  }, []);
-
-  useEffect(() => {
-    const getArticles = async () => {
-      const response = await axios({
-        method: "get",
-        url: `${import.meta.env.VITE_APP_API_URL}/articles`,
-      });
-      setArticles(response.data);
-    };
-    getArticles();
   }, []);
 
   return users && articles && favourites ? (

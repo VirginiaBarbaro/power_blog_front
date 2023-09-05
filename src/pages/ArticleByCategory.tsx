@@ -6,6 +6,7 @@ import NavigationBar from "../components/NavigationBar";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import CustomLoader from "../components/utilities/CustomLoader";
+import truncateText from "../components/utilities/truncateText";
 
 function ArticleByCategory() {
   const [categories, setCategories] = useState<Category>();
@@ -21,15 +22,6 @@ function ArticleByCategory() {
     };
     getArticlesByCategory();
   }, [name]);
-
-  function truncateText(text: string, limit: number) {
-    const words = text.split(" ");
-    if (words.length > limit) {
-      return words.slice(0, limit).join(" ") + "...";
-    } else {
-      return text;
-    }
-  }
 
   return categories && categories.articles ? (
     <>

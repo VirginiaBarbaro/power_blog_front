@@ -4,6 +4,7 @@ import axios from "axios";
 import { formatDistanceToNow } from "date-fns";
 import { Link } from "react-router-dom";
 import CustomLoader from "../../utilities/CustomLoader";
+import truncateText from "../../utilities/truncateText";
 
 function RecentArticle() {
   const [articles, setArticles] = useState<ArticleProps[]>([]);
@@ -26,15 +27,6 @@ function RecentArticle() {
     };
     getArticles();
   }, []);
-
-  function truncateText(text: string, limit: number) {
-    const words = text.split(" ");
-    if (words.length > limit) {
-      return words.slice(0, limit).join(" ") + "...";
-    } else {
-      return text;
-    }
-  }
 
   return articles ? (
     <div className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">

@@ -1,30 +1,10 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
 import { ArticleProps } from "../types/article";
 import { Link } from "react-router-dom";
+import truncateText from "./utilities/truncateText";
+import useArticles from "../hooks/useArticles";
 
 function ArticleCard() {
-  const [articles, setArticles] = useState<ArticleProps[]>([]);
-
-  useEffect(() => {
-    const getArticles = async () => {
-      const response = await axios({
-        method: "get",
-        url: `${import.meta.env.VITE_APP_API_URL}/articles`,
-      });
-      setArticles(response.data);
-    };
-    getArticles();
-  }, []);
-
-  function truncateText(text: string, limit: number) {
-    const words = text.split(" ");
-    if (words.length > limit) {
-      return words.slice(0, limit).join(" ") + "...";
-    } else {
-      return text;
-    }
-  }
+  const articles = useArticles();
 
   return (
     articles && (

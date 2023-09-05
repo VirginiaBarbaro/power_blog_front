@@ -1,31 +1,11 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
 import { ArticleProps } from "../types/article";
 import { Link } from "react-router-dom";
 import CustomLoader from "./utilities/CustomLoader";
+import useArticles from "../hooks/useArticles";
+import truncateText from "./utilities/truncateText";
 
 function Article() {
-  const [articles, setArticles] = useState<ArticleProps[]>([]);
-
-  useEffect(() => {
-    const getArticles = async () => {
-      const response = await axios({
-        method: "get",
-        url: `${import.meta.env.VITE_APP_API_URL}/articles`,
-      });
-      setArticles(response.data);
-    };
-    getArticles();
-  }, []);
-
-  function truncateText(text: string, limit: number) {
-    const words = text.split(" ");
-    if (words.length > limit) {
-      return words.slice(0, limit).join(" ") + "...";
-    } else {
-      return text;
-    }
-  }
+  const articles = useArticles();
 
   return articles ? (
     <>

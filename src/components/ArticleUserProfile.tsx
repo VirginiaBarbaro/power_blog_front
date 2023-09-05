@@ -4,6 +4,7 @@ import { Article, ArticleProps } from "../types/article";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { toast } from "react-toastify";
+import truncateText from "./utilities/truncateText";
 import {
   Modal,
   ModalOverlay,
@@ -85,15 +86,6 @@ function ArticleUserProfile({ userId }: ArticleUserProfileProps) {
     };
     getUserArticles();
   }, [userId]);
-
-  function truncateText(text: string, limit: number) {
-    const words = text.split(" ");
-    if (words.length > limit) {
-      return words.slice(0, limit).join(" ") + "...";
-    } else {
-      return text;
-    }
-  }
 
   const handleUpdateArticle = async (e: FormEvent) => {
     e.preventDefault();

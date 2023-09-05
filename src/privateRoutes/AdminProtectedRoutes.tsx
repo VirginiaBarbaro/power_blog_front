@@ -1,8 +1,8 @@
 import { Navigate, Outlet } from "react-router";
 import { useSelector } from "react-redux";
-import { Token } from "../../types/tokenResponse";
-import { UserProtectedRoutesProps } from "../../types/protectedRoutes";
-import { RootState } from "../../redux/store";
+import { Token } from "../types/tokenResponse";
+import { UserProtectedRoutesProps } from "../types/protectedRoutes";
+import { RootState } from "../redux/store";
 
 function isAdmin(user: Token) {
   if (user && user.isAdmin) {

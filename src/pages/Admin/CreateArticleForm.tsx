@@ -1,17 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../../components/Admin/Sidebar";
 import { ToastContainer, toast } from "react-toastify";
-import { useState, FormEvent, useEffect } from "react";
+import { useState, FormEvent } from "react";
 import axios from "axios";
-import { Category } from "../../types/category";
 import { RootState } from "../../redux/store";
 import { useSelector } from "react-redux";
 import CustomLoader from "../../components/utilities/CustomLoader";
+import useCategories from "../../hooks/useCategories";
 
 function CreateArticleForm() {
+  const categories = useCategories();
   const navigate = useNavigate();
 
-  const [categories, setCategories] = useState<Category[]>([]);
   const [title, setTitle] = useState<string>("");
   const [headline, setHeadline] = useState<string>("");
   const [content, setContent] = useState<string>("");
@@ -19,17 +19,6 @@ function CreateArticleForm() {
   const [image, setImage] = useState<File | null>(null);
 
   const loggedUser = useSelector((state: RootState) => state.token);
-
-  useEffect(() => {
-    const getCategories = async () => {
-      const response = await axios({
-        method: "get",
-        url: `${import.meta.env.VITE_APP_API_URL}/categories`,
-      });
-      setCategories(response.data);
-    };
-    getCategories();
-  }, []);
 
   const prevPage = () => {
     navigate(-1);

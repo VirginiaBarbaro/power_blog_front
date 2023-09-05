@@ -149,12 +149,11 @@ function NavigationBar() {
                     <Dropdown inline label="Categories">
                       {categories.map((categoryList: Category) => (
                         <Link
+                          key={categoryList.id}
                           to={`/category/${categoryList.name}`}
                           onClick={() => setSelectedCategory(categoryList.name)}
                         >
-                          <Dropdown.Item key={categoryList.id}>
-                            {categoryList.name}
-                          </Dropdown.Item>
+                          <Dropdown.Item>{categoryList.name}</Dropdown.Item>
                         </Link>
                       ))}
                     </Dropdown>
@@ -230,9 +229,11 @@ function NavigationBar() {
                                   }
                                 >
                                   {categories.map((category) => {
-                                    <span key={category.id}></span>;
                                     return (
-                                      <option value={category.id}>
+                                      <option
+                                        key={category.id}
+                                        value={category.id}
+                                      >
                                         Category: {category.name}
                                       </option>
                                     );

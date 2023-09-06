@@ -42,8 +42,8 @@ function RecentArticle() {
         >
           {articles.map((article: ArticleProps) => {
             return (
-              <Link to={`/article/${article.id}`}>
-                <li className="py-3 sm:py-4" key={article.id}>
+              <Link to={`/article/${article.id}`} key={article.id}>
+                <li className="py-3 sm:py-4">
                   <div className="flex items-center space-x-4">
                     <div className="flex-shrink-0">
                       <img

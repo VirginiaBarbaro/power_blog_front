@@ -91,8 +91,8 @@ function NavigationBar() {
 
     const response = await axios({
       headers: {
-        Authorization: `Bearer ${loggedUser.token}`,
         "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${loggedUser.token}`,
       },
       method: "post",
       url: `${import.meta.env.VITE_APP_API_URL}/articles`,

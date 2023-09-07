@@ -52,9 +52,7 @@ function LatestUsers() {
                           ? `${import.meta.env.VITE_APP_IMG_URL}${
                               user.avatar[0]
                             }`
-                          : `${import.meta.env.VITE_APP_IMG_URL}${
-                              user.avatar
-                            }` || "null"
+                          : `${import.meta.env.VITE_APP_IMG_URL}${user.avatar}`
                       }
                       alt={user.firstname + user.lastname}
                     />

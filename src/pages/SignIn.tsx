@@ -61,7 +61,7 @@ function SignIn() {
               </Link>
             </div>
           </div>
-          <form onSubmit={(event) => handleUserLogin(event)}>
+          <form onSubmit={(event) => handleUserLogin(event)} autoComplete="off">
             <div className="user-box grid md:grid-cols-2 md:gap-6">
               <div className="user-box">
                 <input

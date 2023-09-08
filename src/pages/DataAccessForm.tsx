@@ -67,7 +67,11 @@ function DataAccessForm() {
             </h2>
           </div>
         </div>
-        <form className="px-4" onSubmit={(e) => handleUpdateCredentials(e)}>
+        <form
+          className="px-4"
+          onSubmit={(e) => handleUpdateCredentials(e)}
+          autoComplete="off"
+        >
           <div className="grid md:grid-cols-2 md:gap-6">
             <div className="relative z-0 w-full mb-6 group">
               <input

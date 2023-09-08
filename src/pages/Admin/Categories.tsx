@@ -178,6 +178,7 @@ function Categories() {
                               handleEditCategory(e);
                               setIsOpened(false);
                             }}
+                            autoComplete="off"
                           >
                             <div>
                               <div className="relative z-0 w-full mb-8 group">
@@ -271,6 +272,7 @@ function Categories() {
                     handleCreateCategory(e);
                     setIsOpened(false);
                   }}
+                  autoComplete="off"
                 >
                   <div>
                     <div className="relative z-0 w-full mb-8 group">

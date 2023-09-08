@@ -76,7 +76,7 @@ function SignUp() {
               </p>
             </div>
           </div>
-          <form onSubmit={(e) => handleCreateUser(e)}>
+          <form onSubmit={(e) => handleCreateUser(e)} autoComplete="off">
             <div className="user-box grid md:grid-cols-2 md:gap-6">
               <div className="user-box">
                 <input

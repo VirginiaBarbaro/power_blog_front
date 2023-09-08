@@ -176,7 +176,10 @@ function NavigationBar() {
                         <ModalHeader>Create Article</ModalHeader>
                         <ModalCloseButton />
                         <ModalBody>
-                          <form onSubmit={(e) => handleCreateArticle(e)}>
+                          <form
+                            onSubmit={(e) => handleCreateArticle(e)}
+                            autoComplete="off"
+                          >
                             <div>
                               <div className="relative z-0 w-full mb-8 group">
                                 <input

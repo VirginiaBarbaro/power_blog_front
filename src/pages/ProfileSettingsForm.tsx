@@ -81,7 +81,11 @@ function ProfileSettingsForm() {
             <h2 className="text-center text-4xl pb-12">Profile settings</h2>
           </div>
         </div>
-        <form className="px-4" onSubmit={(e) => handleEditProfile(e)}>
+        <form
+          className="px-4"
+          onSubmit={(e) => handleEditProfile(e)}
+          autoComplete="off"
+        >
           <div className="grid md:grid-cols-2 md:gap-6">
             <div className="relative z-0 w-full mb-6 group">
               <input

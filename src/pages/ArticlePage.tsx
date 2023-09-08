@@ -245,7 +245,10 @@ function ArticlePage() {
               </ModalHeader>
               <ModalCloseButton />
               <ModalBody>
-                <form onSubmit={(e) => handleCreateComment(e)}>
+                <form
+                  onSubmit={(e) => handleCreateComment(e)}
+                  autoComplete="off"
+                >
                   <div>
                     <div className="relative z-0 w-full mb-8 group">
                       <textarea

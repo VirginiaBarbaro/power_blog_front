@@ -210,7 +210,10 @@ function ArticleUserProfile({ userId }: ArticleUserProfileProps) {
                           <div>Edit your article ID: {updateArticleId}</div>
                         </DrawerHeader>
                         <DrawerBody>
-                          <form onSubmit={(e) => handleUpdateArticle(e)}>
+                          <form
+                            onSubmit={(e) => handleUpdateArticle(e)}
+                            autoComplete="off"
+                          >
                             <div className="relative z-0 mb-8">
                               <input
                                 type="text"

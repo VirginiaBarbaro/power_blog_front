@@ -76,7 +76,7 @@ function SignUp() {
               </p>
             </div>
           </div>
-          <form onSubmit={(e) => handleCreateUser(e)} autoComplete="off">
+          <form onSubmit={(e) => handleCreateUser(e)} autoComplete="off" className="signup-form">
             <div className="user-box grid md:grid-cols-2 md:gap-6">
               <div className="user-box">
                 <input
@@ -160,7 +160,7 @@ function SignUp() {
                 ></input>
               </div>
               <center>
-                <button className="signin-btn">
+                <button className="signup-btn">
                   Sign up
                   <span></span>
                 </button>

@@ -1,6 +1,18 @@
 import { Link } from "react-router-dom";
 
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+} from "@chakra-ui/react";
+
 function Landing() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <div>
       <section className="bg-gray-500 bg-blend-multiply landing-hero-image">
@@ -23,6 +35,41 @@ function Landing() {
             </Link>
           </div>
         </div>
+        <div className="flex justify-center">
+          <button className="text-light-grey btn-about" onClick={onOpen}>
+            About this
+          </button>
+        </div>
+        <Modal onClose={onClose} isOpen={isOpen} isCentered>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader className="text-electric-blue border-b-2">
+              Demo credentials
+            </ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <h4 className="mb-3">
+                <i className="fa-solid fa-user mr-1"></i> <strong>User:</strong>
+              </h4>
+              <p>
+                <strong>Email:</strong> author@blog.com
+              </p>
+              <p className="my-1">
+                <strong>Password:</strong> 1234
+              </p>
+              <h4 className="mb-3 mt-5">
+                <i className="fa-solid fa-user-lock mr-1"></i>{" "}
+                <strong>Admin:</strong>
+              </h4>
+              <p>
+                <strong>Email:</strong> admin@blog.com
+              </p>
+              <p className="my-1">
+                <strong>Password:</strong> 1234
+              </p>
+            </ModalBody>
+          </ModalContent>
+        </Modal>
       </section>
     </div>
   );

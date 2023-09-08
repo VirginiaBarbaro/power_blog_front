@@ -273,3 +273,20 @@
     opacity: 1;
   }
 }
+
+.btn-about {
+  border-radius: 0.4rem;
+  padding: 0.5rem 0.85rem 0.35rem 0.85rem;
+  font-size: 1rem;
+  font-family: "BerlingskeSerif" !important;
+  color: #0088cc;
+  background-color: #eeeeee;
+
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out,
+    border 0.3s ease-in-out;
+}
+
+.btn-about:hover {
+  color: #eeeeee;
+  background-color: #0088cc !important;
+}

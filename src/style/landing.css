@@ -23,6 +23,10 @@
     margin-top: 9rem;
     margin-left: 6rem;
   }
+
+  .btn-about {
+    margin-top: 3rem;
+  }
 }
 
 .get-started:before {

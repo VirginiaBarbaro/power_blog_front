@@ -125,7 +125,7 @@ function NavigationBar() {
           } navbar navbar-expand-md bg-dark-blue flex justify-between`}
         >
           <ToastContainer className="toastify--success" />
-          <div className="container max-w-screen-xl flex flex-wrap p-1 justify-between">
+          <div className="container max-w-screen-xl flex flex-wrap p-1 justify-between max-[536px]:">
             <Link to={"/home"} className="flex mt-3">
               <img
                 src="/new_logo.webp.png"
@@ -133,10 +133,13 @@ function NavigationBar() {
                 alt="Power Blog Logo"
               />
             </Link>
+            <div className="mt-3">
+              <Navbar.Toggle />
+            </div>
             <div className="flex">
               <Navbar.Collapse>
                 <div
-                  className="items-center justify-between w-full md:flex md:w-auto mt-1"
+                  className="items-center justify-between w-full md:flex md:w-auto mt-1 mr-64"
                   id="navbar-sticky"
                 >
                   <ul className="text-lg flex flex-col p-4 md:p-0 font-semibold rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 text-dark-blue">
@@ -265,10 +268,10 @@ function NavigationBar() {
                 </div>
               </Navbar.Collapse>
             </div>
+            {/* <div className="mt-3">
+              <Navbar.Toggle />
+            </div> */}
             <div className="flex justify-center">
-              <div className="mt-3">
-                <Navbar.Toggle />
-              </div>
               <Dropdown
                 label={
                   <Avatar

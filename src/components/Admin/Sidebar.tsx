@@ -1,12 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import { useDispatch } from "react-redux";
 import { setToken } from "../../redux/slices/tokenSlice";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import useLoggedUser from "../../hooks/useLoggedUser";
 
 function Sidebar() {
-  const loggedUser = useSelector((state: RootState) => state.token);
+  const loggedUser = useLoggedUser();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

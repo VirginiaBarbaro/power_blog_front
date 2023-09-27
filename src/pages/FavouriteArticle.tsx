@@ -1,6 +1,4 @@
-import { useSelector } from "react-redux";
 import NavigationBar from "../components/NavigationBar";
-import { RootState } from "../redux/store";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Article } from "../types/article";
@@ -8,9 +6,10 @@ import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 import CustomLoader from "../components/utilities/CustomLoader";
 import truncateText from "../components/utilities/truncateText";
+import useLoggedUser from "../hooks/useLoggedUser";
 
 function FavouriteArticle() {
-  const loggedUser = useSelector((state: RootState) => state.token);
+  const loggedUser = useLoggedUser();
 
   const [favouritesArticles, setFavouritesArticles] = useState<Article[]>([]);
 

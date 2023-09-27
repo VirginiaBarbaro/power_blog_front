@@ -1,8 +1,7 @@
 import { Navigate, Outlet } from "react-router";
-import { useSelector } from "react-redux";
 import { Token } from "../types/tokenResponse";
 import { UserProtectedRoutesProps } from "../types/protectedRoutes";
-import { RootState } from "../redux/store";
+import useLoggedUser from "../hooks/useLoggedUser";
 
 function isAdmin(user: Token) {
   if (user && user.isAdmin) {
@@ -17,7 +16,7 @@ function AdminProtectedRoutes({
   redirectTo = "/home",
   children,
 }: UserProtectedRoutesProps) {
-  const user: Token = useSelector((state: RootState) => state.token);
+  const user: Token = useLoggedUser();
 
   if (!user.token) {
     return <Navigate to={redirectTo} />;

@@ -3,10 +3,9 @@ import Sidebar from "../../components/Admin/Sidebar";
 import { ToastContainer, toast } from "react-toastify";
 import { useState, FormEvent } from "react";
 import axios from "axios";
-import { RootState } from "../../redux/store";
-import { useSelector } from "react-redux";
 import CustomLoader from "../../components/utilities/CustomLoader";
 import useCategories from "../../hooks/useCategories";
+import useLoggedUser from "../../hooks/useLoggedUser";
 
 function CreateArticleForm() {
   const categories = useCategories();
@@ -18,7 +17,7 @@ function CreateArticleForm() {
   const [categoryId, setCategoryId] = useState<number>();
   const [image, setImage] = useState<File | null>(null);
 
-  const loggedUser = useSelector((state: RootState) => state.token);
+  const loggedUser = useLoggedUser();
 
   const prevPage = () => {
     navigate(-1);

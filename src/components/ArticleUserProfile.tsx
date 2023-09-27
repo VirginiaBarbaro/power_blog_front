@@ -1,8 +1,6 @@
 import { useEffect, useState, FormEvent } from "react";
 import axios from "axios";
 import { Article, ArticleProps } from "../types/article";
-import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
 import { toast } from "react-toastify";
 import truncateText from "./utilities/truncateText";
 import {
@@ -28,6 +26,7 @@ import {
 import { Link } from "react-router-dom";
 import { Category } from "../types/category";
 import CustomLoader from "./utilities/CustomLoader";
+import useLoggedUser from "../hooks/useLoggedUser";
 
 interface ArticleUserProfileProps {
   userId: string;
@@ -46,7 +45,7 @@ function ArticleUserProfile({ userId }: ArticleUserProfileProps) {
     setIsOpened(false);
   };
 
-  const loggedUser = useSelector((state: RootState) => state.token);
+  const loggedUser = useLoggedUser();
 
   const [userArticles, setUserArticles] = useState<ArticleProps[]>([]);
 

@@ -3,14 +3,13 @@ import Sidebar from "../../components/Admin/Sidebar";
 import { ToastContainer, toast } from "react-toastify";
 import { useState, FormEvent } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
 import CustomLoader from "../../components/utilities/CustomLoader";
 import useCategories from "../../hooks/useCategories";
+import useLoggedUser from "../../hooks/useLoggedUser";
 
 function EditArticleForm() {
   const categories = useCategories();
-  const loggedUser = useSelector((state: RootState) => state.token);
+  const loggedUser = useLoggedUser();
 
   const { id } = useParams();
   const navigate = useNavigate();

@@ -1,14 +1,15 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FormEvent, useState } from "react";
 import "../style/authForm.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setToken } from "../redux/slices/tokenSlice";
-import { RootState } from "../redux/store";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useLoggedUser from "../hooks/useLoggedUser";
 
 function SignIn() {
+  const loggedUser = useLoggedUser();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -17,14 +18,12 @@ function SignIn() {
 
   const invalidCredentials = () => toast.error("Invalid Credentials!");
 
-  const token = useSelector((state: RootState) => state.token);
-
   const handleUserLogin = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
       const response = await axios({
         headers: {
-          Authorization: `bearer: ${token}`,
+          Authorization: `bearer: ${loggedUser.token}`,
         },
         method: "post",
         url: `${import.meta.env.VITE_APP_API_URL}/auth/users`,

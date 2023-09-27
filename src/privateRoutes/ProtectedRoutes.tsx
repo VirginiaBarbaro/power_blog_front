@@ -1,14 +1,13 @@
 import { Navigate, Outlet } from "react-router";
-import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
 import { User } from "../types/tokenResponse";
 import { UserProtectedRoutesProps } from "../types/protectedRoutes";
+import useLoggedUser from "../hooks/useLoggedUser";
 
 function ProtectedRoutes({
   redirectTo = "/login",
   children,
 }: UserProtectedRoutesProps) {
-  const loggedUser: User = useSelector((state: RootState) => state.token);
+  const loggedUser: User = useLoggedUser();
 
   if (!loggedUser.token) {
     return <Navigate to={redirectTo} />;

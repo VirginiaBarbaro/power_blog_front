@@ -2,8 +2,6 @@ import { useState, useEffect, FormEvent } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Avatar, Dropdown } from "flowbite-react";
 import { Navbar } from "flowbite-react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../redux/store";
 import { setToken } from "../redux/slices/tokenSlice";
 import {
   Modal,
@@ -17,6 +15,8 @@ import {
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { Category } from "../types/category";
+import useLoggedUser from "../hooks/useLoggedUser";
+import { useDispatch } from "react-redux";
 
 function NavigationBar() {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -28,7 +28,7 @@ function NavigationBar() {
   const [image, setImage] = useState<File | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
 
-  const loggedUser = useSelector((state: RootState) => state.token);
+  const loggedUser = useLoggedUser();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

@@ -23,13 +23,12 @@ import {
   ModalCloseButton,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
 import Footer from "../components/Footer";
 import CustomLoader from "../components/utilities/CustomLoader";
+import useLoggedUser from "../hooks/useLoggedUser";
 
 function ArticlePage() {
-  const loggedUser = useSelector((state: RootState) => state.token);
+  const loggedUser = useLoggedUser();
 
   const [isOpening, setIsOpening] = useState(false);
 

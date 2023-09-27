@@ -2,15 +2,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { FavouriteArticle } from "../../../types/article";
 import { UserProps } from "../../../types/user";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../redux/store";
 import useArticles from "../../../hooks/useArticles";
+import useLoggedUser from "../../../hooks/useLoggedUser";
 
 function DashboardCards() {
   const [users, setUsers] = useState<UserProps[]>([]);
   const [favourites, setFavourites] = useState<FavouriteArticle[]>([]);
   const articles = useArticles();
-  const loggedUser = useSelector((state: RootState) => state.token);
+  const loggedUser = useLoggedUser();
 
   useEffect(() => {
     const getUsers = async () => {

@@ -15,16 +15,15 @@ import {
   Button,
 } from "@chakra-ui/react";
 import truncateText from "../../components/utilities/truncateText";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
 import { ToastContainer, toast } from "react-toastify";
 import CustomLoader from "../../components/utilities/CustomLoader";
+import useLoggedUser from "../../hooks/useLoggedUser";
 
 function Article() {
   const successDeleted = () => toast.success("Article deleted successfuly!");
   const errorDeleted = () => toast.error("Error deleting article!");
 
-  const loggedUser = useSelector((state: RootState) => state.token);
+  const loggedUser = useLoggedUser();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 

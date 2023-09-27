@@ -12,15 +12,14 @@ import {
   useDisclosure,
   Button,
 } from "@chakra-ui/react";
-import { RootState } from "../../redux/store";
-import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import CustomLoader from "../../components/utilities/CustomLoader";
 import useCategories from "../../hooks/useCategories";
+import useLoggedUser from "../../hooks/useLoggedUser";
 
 function Categories() {
   const categories = useCategories();
-  const loggedUser = useSelector((state: RootState) => state.token);
+  const loggedUser = useLoggedUser();
 
   const successCreated = () => toast.success("Category created!");
   const errorCreated = () => toast.error("Error creating category!");

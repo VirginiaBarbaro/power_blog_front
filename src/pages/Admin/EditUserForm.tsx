@@ -3,11 +3,10 @@ import Sidebar from "../../components/Admin/Sidebar";
 import { ToastContainer, toast } from "react-toastify";
 import { useState, FormEvent } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import useLoggedUser from "../../hooks/useLoggedUser";
 
 function EditUserForm() {
-  const loggedUser = useSelector((state: RootState) => state.token);
+  const loggedUser = useLoggedUser();
 
   const { id } = useParams();
   const navigate = useNavigate();

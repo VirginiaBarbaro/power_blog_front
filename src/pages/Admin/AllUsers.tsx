@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import Sidebar from "../../components/Admin/Sidebar";
 import axios from "axios";
 import { UserProps } from "../../types/user";
-import { RootState } from "../../redux/store";
-import { useSelector } from "react-redux";
+
 import { ToastContainer, toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import {
@@ -17,9 +16,10 @@ import {
   useDisclosure,
   Button,
 } from "@chakra-ui/react";
+import useLoggedUser from "../../hooks/useLoggedUser";
 
 function AllUsers() {
-  const loggedUser = useSelector((state: RootState) => state.token);
+  const loggedUser = useLoggedUser();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 

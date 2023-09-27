@@ -1,16 +1,15 @@
 import { useParams } from "react-router-dom";
 import NavigationBar from "../components/NavigationBar";
-import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
 import InfoUserProfile from "../components/InfoUserProfile";
 import ArticleUserProfile from "../components/ArticleUserProfile";
 import Footer from "../components/Footer";
 import CustomLoader from "../components/utilities/CustomLoader";
+import useLoggedUser from "../hooks/useLoggedUser";
 
 function UserProfile() {
   const { id } = useParams();
 
-  const loggedUser = useSelector((state: RootState) => state.token);
+  const loggedUser = useLoggedUser();
 
   return loggedUser ? (
     <>

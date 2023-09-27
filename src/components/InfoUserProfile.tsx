@@ -1,14 +1,13 @@
-import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { RootState } from "../redux/store";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { UserProps } from "../types/user";
 import CustomLoader from "./utilities/CustomLoader";
+import useLoggedUser from "../hooks/useLoggedUser";
 // import { Avatar } from "flowbite-react";
 
 function InfoUserProfile() {
-  const loggedUser = useSelector((state: RootState) => state.token);
+  const loggedUser = useLoggedUser();
 
   const [user, setUser] = useState<UserProps>();
 

@@ -1,13 +1,12 @@
 import axios from "axios";
 import NavigationBar from "../components/NavigationBar";
 import { useState, FormEvent } from "react";
-import { RootState } from "../redux/store";
-import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import useLoggedUser from "../hooks/useLoggedUser";
 
 function DataAccessForm() {
-  const loggedUser = useSelector((state: RootState) => state.token);
+  const loggedUser = useLoggedUser();
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
